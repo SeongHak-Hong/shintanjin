@@ -480,7 +480,7 @@ body.no-scroll {
   width: 100%;
   z-index: 1000;
   background-color: var(--color-paper-white);
-  padding: var(--spacing-16) 0;
+  padding: var(--spacing-24) 0;
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
@@ -512,8 +512,9 @@ body.no-scroll {
   color: var(--color-graphite);
 }
 
-.sbc-logo-svg {
-  color: var(--color-violet-pulse);
+.sbc-logo-image {
+  transition: filter 0.3s ease-in-out;
+  filter: brightness(0) invert(10%); /* Always make the white SVG dark in the header */
 }
 
 .sbc-nav-menu {
@@ -523,9 +524,10 @@ body.no-scroll {
 }
 
 .sbc-nav-item {
-  font-size: var(--text-body);
-  color: var(--color-iron);
+  font-size: var(--text-body-lg); /* 16px */
+  color: var(--color-graphite);
   font-weight: var(--font-weight-medium);
+  padding: 0 var(--spacing-8);
   cursor: pointer;
   transition: color 0.2s;
 }
@@ -540,7 +542,7 @@ body.no-scroll {
   border: none;
   border-radius: var(--radius-buttons); /* 4px */
   padding: var(--spacing-12) var(--spacing-20);
-  font-size: var(--text-body);
+  font-size: var(--text-body-lg); /* 16px */
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
   transition: all 0.2s;
@@ -582,7 +584,7 @@ body.no-scroll {
   justify-content: space-between;
   flex: 1;
   width: 100%;
-  max-width: 1280px;
+  max-width: 86rem;
   margin: 0 auto;
   padding: 0 var(--spacing-24) var(--spacing-40) var(--spacing-24);
   box-sizing: border-box;
@@ -779,7 +781,7 @@ body.no-scroll {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: var(--spacing-40);
-  align-items: center;
+  align-items: start;
   width: 100%;
 }
 
@@ -792,7 +794,7 @@ body.no-scroll {
 .sbc-video-left-col {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .sbc-scroll-flip-text {

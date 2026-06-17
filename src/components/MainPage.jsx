@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTE_CHATBOT } from '../constants/routes';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import sbcLogo from '../assets/SBC-logo.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -248,33 +249,22 @@ export default function MainPage() {
       <nav className={`sbc-nav ${isNavVisible ? '' : 'sbc-nav-hidden'} ${isAtTop ? 'sbc-nav-top' : ''}`}>
         <div className="sbc-nav-container">
           <div className="sbc-nav-brand" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            {/* 신탄진침례교회 Logo Lockup (Clean SVG representation) */}
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" className="sbc-logo-svg">
-              <path fillRule="evenodd" clipRule="evenodd" d="M5.58516 25.3643L4.10156 26.6986H27.8938C28.631 25.8788 29.2854 24.9831 29.8426 24.0234H9.08022C7.7899 24.0234 6.5449 24.5006 5.58516 25.3643Z" fill="currentColor"/>
-              <path fillRule="evenodd" clipRule="evenodd" d="M15.9991 32.0008C19.2436 32.0008 22.2615 31.0345 24.7834 29.375H7.21484C9.73683 31.0345 12.7547 32.0008 15.9991 32.0008Z" fill="currentColor"/>
-              <path fillRule="evenodd" clipRule="evenodd" d="M26.8216 6.26714L27.896 5.30078H4.10506C3.36792 6.12052 2.71343 7.01623 2.15625 7.97593H22.3695C24.0144 7.97593 25.6006 7.36812 26.8229 6.26847L26.8216 6.26714Z" fill="currentColor"/>
-              <path fillRule="evenodd" clipRule="evenodd" d="M15.9991 0C12.7547 0 9.73683 0.966359 7.21484 2.62583H24.7834C22.2628 0.966359 19.2436 0 15.9991 0Z" fill="currentColor"/>
-              <path fillRule="evenodd" clipRule="evenodd" d="M20.6886 11.8913C21.575 11.0929 22.7267 10.6517 23.9197 10.6517H31.0831C30.7512 9.71734 30.3367 8.82296 29.8448 7.97656H27.1762C25.7246 7.97656 24.3249 8.51372 23.2466 9.48408C22.5068 10.1492 21.5457 10.5184 20.55 10.5184H0.964567C0.651318 11.3781 0.408717 12.2725 0.246094 13.1936H17.2935C18.5478 13.1936 19.7568 12.7297 20.6886 11.8913Z" fill="currentColor"/>
-              <path fillRule="evenodd" clipRule="evenodd" d="M14.7073 17.2351C15.5951 16.4367 16.7454 15.9955 17.9385 15.9955H32C32 15.0837 31.9227 14.1907 31.7761 13.3203H21.1949C19.7433 13.3203 18.3437 13.8575 17.2653 14.8278C16.5255 15.493 15.5644 15.8622 14.5687 15.8622H0.000611414C-0.00738643 16.7725 0.0632612 17.6656 0.201891 18.536H11.3122C12.5666 18.536 13.7756 18.0721 14.7073 17.2337V17.2351Z" fill="currentColor"/>
-              <path fillRule="evenodd" clipRule="evenodd" d="M11.3349 20.1833C10.5951 20.8484 9.63407 21.2176 8.63834 21.2176H0.871094C1.19367 22.1507 1.5989 23.0464 2.0801 23.8928H5.38188C6.63621 23.8928 7.84522 23.4289 8.77697 22.5905C9.66339 21.7921 10.8151 21.3509 12.0081 21.3509H31.083C31.3882 20.4912 31.6215 19.5968 31.7761 18.6758H15.2646C13.8129 18.6758 12.4133 19.2129 11.3349 20.1833Z" fill="currentColor"/>
-            </svg>
-            <span className="sbc-logo-text">신탄진침례교회</span>
+            <img src={sbcLogo} alt="신탄진침례교회 로고" height="40" className="sbc-logo-image" />
           </div>
 
           <div className="sbc-nav-menu">
-            <span className="sbc-nav-item">Company</span>
-            <span className="sbc-nav-item">Technology</span>
-            <span className="sbc-nav-item">Solutions</span>
-            <span className="sbc-nav-item">Our Edge</span>
-            <span className="sbc-nav-item">Our Team</span>
-            <span className="sbc-nav-item">Investors</span>
-            <span className="sbc-nav-item">News</span>
+            <span className="sbc-nav-item">교회소개</span>
+            <span className="sbc-nav-item">예배찬양</span>
+            <span className="sbc-nav-item">양육훈련</span>
+            <span className="sbc-nav-item">다음세대</span>
+            <span className="sbc-nav-item">선교전도</span>
+            <span className="sbc-nav-item">나눔터</span>
           </div>
 
           <div className="sbc-nav-actions">
-            {/* AI Assistant access button representing 신탄진침례교회's 'Get in Touch' button */}
+            {/* Action button for New Member Registration */}
             <button className="sbc-btn-accent" onClick={handleStartChatbot}>
-              AI 음성 비서 시작하기
+              새가족 등록
             </button>
           </div>
         </div>
@@ -579,17 +569,8 @@ export default function MainPage() {
         <div className="sbc-container">
           <div className="sbc-footer-top">
             <div className="sbc-footer-brand">
-              <div className="sbc-nav-brand">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" className="sbc-logo-svg">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M5.58516 25.3643L4.10156 26.6986H27.8938C28.631 25.8788 29.2854 24.9831 29.8426 24.0234H9.08022C7.7899 24.0234 6.5449 24.5006 5.58516 25.3643Z" fill="white"/>
-                  <path fillRule="evenodd" clipRule="evenodd" d="M15.9991 32.0008C19.2436 32.0008 22.2615 31.0345 24.7834 29.375H7.21484C9.73683 31.0345 12.7547 32.0008 15.9991 32.0008Z" fill="white"/>
-                  <path fillRule="evenodd" clipRule="evenodd" d="M26.8216 6.26714L27.896 5.30078H4.10506C3.36792 6.12052 2.71343 7.01623 2.15625 7.97593H22.3695C24.0144 7.97593 25.6006 7.36812 26.8229 6.26847L26.8216 6.26714Z" fill="white"/>
-                  <path fillRule="evenodd" clipRule="evenodd" d="M15.9991 0C12.7547 0 9.73683 0.966359 7.21484 2.62583H24.7834C22.2628 0.966359 19.2436 0 15.9991 0Z" fill="white"/>
-                  <path fillRule="evenodd" clipRule="evenodd" d="M20.6886 11.8913C21.575 11.0929 22.7267 10.6517 23.9197 10.6517H31.0831C30.7512 9.71734 30.3367 8.82296 29.8448 7.97656H27.1762C25.7246 7.97656 24.3249 8.51372 23.2466 9.48408C22.5068 10.1492 21.5457 10.5184 20.55 10.5184H0.964567C0.651318 11.3781 0.408717 12.2725 0.246094 13.1936H17.2935C18.5478 13.1936 19.7568 12.7297 20.6886 11.8913Z" fill="white"/>
-                  <path fillRule="evenodd" clipRule="evenodd" d="M14.7073 17.2351C15.5951 16.4367 16.7454 15.9955 17.9385 15.9955H32C32 15.0837 31.9227 14.1907 31.7761 13.3203H21.1949C19.7433 13.3203 18.3437 13.8575 17.2653 14.8278C16.5255 15.493 15.5644 15.8622 14.5687 15.8622H0.000611414C-0.00738643 16.7725 0.0632612 17.6656 0.201891 18.536H11.3122C12.5666 18.536 13.7756 18.0721 14.7073 17.2337V17.2351Z" fill="white"/>
-                  <path fillRule="evenodd" clipRule="evenodd" d="M11.3349 20.1833C10.5951 20.8484 9.63407 21.2176 8.63834 21.2176H0.871094C1.19367 22.1507 1.5989 23.0464 2.0801 23.8928H5.38188C6.63621 23.8928 7.84522 23.4289 8.77697 22.5905C9.66339 21.7921 10.8151 21.3509 12.0081 21.3509H31.083C31.3882 20.4912 31.6215 19.5968 31.7761 18.6758H15.2646C13.8129 18.6758 12.4133 19.2129 11.3349 20.1833Z" fill="white"/>
-                </svg>
-                <span className="sbc-logo-text" style={{ color: 'white' }}>신탄진침례교회</span>
+              <div className="sbc-nav-brand" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                <img src={sbcLogo} alt="신탄진침례교회 로고" height="40" />
               </div>
             </div>
 
