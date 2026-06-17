@@ -242,6 +242,14 @@ export default function MainPage() {
     };
   }, []);
 
+  const instagramImages = [
+    "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=500&h=500&fit=crop", // community
+    "https://images.unsplash.com/photo-1544427920-c49ccfb85579?w=500&h=500&fit=crop", // worship/music
+    "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=500&h=500&fit=crop", // people gathering
+    "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&h=500&fit=crop", // music
+    "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=500&h=500&fit=crop", // friends
+    "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=500&h=500&fit=crop"  // group
+  ];
 
   return (
     <div className="sbc-clone-root">
@@ -560,6 +568,39 @@ export default function MainPage() {
                 className="sbc-energy-net-img"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7.5. Instagram Section */}
+      <section className="sbc-instagram-section">
+        <div className="sbc-container">
+          <div className="sbc-instagram-header">
+            <h2 className="sbc-instagram-title sbc-heading-style-h3">
+              삶이 되는 예배
+            </h2>
+            <div className="sbc-instagram-desc-wrap">
+              <p className="sbc-instagram-desc sbc-text-medium">
+                주일의 예배당을 넘어, 성도들의 평범한 일상 속에서도 하나님의 은혜는 계속됩니다. 함께 기도하고, 땀 흘려 봉사하고, 해맑게 웃는 신탄진침례교회의 따뜻한 순간들을 사진으로 기록합니다. 우리의 걸음이 담긴 온라인 갤러리에 방문하셔서, 서로의 삶을 응원하고 소통하는 기쁨을 누려보세요.
+              </p>
+              <button className="sbc-instagram-btn" onClick={() => window.open('https://instagram.com', '_blank')}>
+                인스타그램 방문하기
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div className="sbc-marquee-wrapper">
+          <div className="sbc-marquee-container">
+            {/* Duplicate the array to create a seamless infinite scrolling effect */}
+            {[...instagramImages, ...instagramImages].map((img, idx) => (
+              <div key={idx} className="sbc-marquee-item">
+                <img src={img} alt={`교회 일상 사진 ${idx + 1}`} loading="lazy" />
+              </div>
+            ))}
           </div>
         </div>
       </section>

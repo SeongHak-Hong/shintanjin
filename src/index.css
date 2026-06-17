@@ -1170,6 +1170,106 @@ body.no-scroll {
   box-shadow: var(--shadow-subtle);
 }
 
+/* Instagram Section */
+.sbc-instagram-section {
+  padding: var(--spacing-80) 0;
+  background-color: var(--color-paper-white);
+  overflow: hidden;
+}
+
+.sbc-instagram-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-40);
+  margin-bottom: var(--spacing-64);
+  align-items: start;
+}
+
+.sbc-instagram-title {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.sbc-instagram-desc-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  align-items: flex-start;
+}
+
+.sbc-instagram-desc {
+  margin: 0;
+}
+
+.sbc-instagram-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-12) var(--spacing-20);
+  background-color: var(--color-fog);
+  color: var(--color-graphite);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-buttons);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border: none;
+  font-size: var(--text-body-sm);
+}
+
+.sbc-instagram-btn:hover {
+  background-color: #e0e0e0;
+}
+
+/* Marquee Styles */
+.sbc-marquee-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.sbc-marquee-container {
+  display: flex;
+  width: max-content;
+  animation: marquee 60s linear infinite; /* Slowed down from 30s to 60s */
+  gap: var(--spacing-16);
+}
+
+
+
+.sbc-marquee-item {
+  width: 320px;
+  height: 320px;
+  border-radius: var(--radius-containers);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sbc-marquee-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - (var(--spacing-16) / 2)));
+  }
+}
+
+@media (max-width: 991px) {
+  .sbc-instagram-header {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-24);
+  }
+  
+  .sbc-marquee-item {
+    width: 280px;
+    height: 280px;
+  }
+}
+
 /* 8. Footer Section */
 .sbc-footer {
   background-color: var(--color-graphite);
