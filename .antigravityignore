@@ -1,0 +1,27 @@
+# 패키지 및 빌드 결과물 (절대 읽을 필요 없음)
+node_modules/
+build/
+dist/
+out/
+.next/
+.nuxt/
+
+# 로그 및 캐시 파일 (용량이 커서 토큰 낭비 주범)
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.eslintcache
+.stylelintcache
+
+# 환경 변수 및 보안 파일 (보안 상 제외)
+.env
+.env.local
+.env.*.local
+*.pem
+
+# IDE 및 버전 관리 설정
+.git/
+.vscode/
+.idea/
+.DS_Store
