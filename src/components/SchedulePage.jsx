@@ -102,7 +102,7 @@ export default function SchedulePage() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{
             backgroundColor: 'var(--color-lavender-wash)',
-            color: 'var(--color-violet-pulse)',
+            color: 'var(--color-coral-red)',
             padding: '10px',
             borderRadius: '12px',
             display: 'flex',
@@ -130,7 +130,7 @@ export default function SchedulePage() {
           backgroundColor: 'var(--color-paper-white)',
           padding: '8px 16px',
           borderRadius: '9999px',
-          border: '1px solid var(--color-mist)',
+          border: '1px solid var(--color-ash)',
         }}>
           <button onClick={handlePrevMonth} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', color: 'var(--color-slate)' }}>
             <ChevronLeft size={20} />
@@ -199,7 +199,7 @@ export default function SchedulePage() {
                   </div>
                   <div style={{
                     fontSize: '14px',
-                    color: 'var(--color-violet-pulse)',
+                    color: 'var(--color-coral-red)',
                     fontWeight: '500'
                   }}>
                     {day}
@@ -251,12 +251,12 @@ export default function SchedulePage() {
                     marginTop: '4px'
                   }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <Clock size={16} color="var(--color-violet-pulse)" />
+                      <Clock size={16} color="var(--color-coral-red)" />
                       <span>{time}</span>
                     </div>
                     {schedule.location && (
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <MapPin size={16} color="var(--color-violet-pulse)" />
+                        <MapPin size={16} color="var(--color-coral-red)" />
                         <span>{schedule.location}</span>
                       </div>
                     )}

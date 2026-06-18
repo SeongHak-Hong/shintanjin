@@ -103,10 +103,7 @@ export default function AdminLogin() {
             border: '1px solid var(--color-ash)',
             marginBottom: '16px'
           }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-violet-pulse)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
+            <span className="material-symbols-outlined" style={{ color: 'var(--color-coral-red)' }}>lock</span>
           </div>
           <h1 style={{
             fontFamily: 'var(--font-moderat-serif)',
@@ -163,7 +160,7 @@ export default function AdminLogin() {
               disabled={loading}
               style={{
                 backgroundColor: 'var(--color-paper-white)',
-                border: '1px solid var(--color-mist)',
+                border: '1px solid var(--color-ash)',
                 borderRadius: 'var(--radius-inputs)',
                 padding: '10px 12px',
                 fontSize: 'var(--text-body)',
@@ -173,11 +170,11 @@ export default function AdminLogin() {
                 transition: 'border-color 0.2s, box-shadow 0.2s'
               }}
               onFocus={(e) => {
-                e.target.style.borderColor = 'var(--color-violet-pulse)';
+                e.target.style.borderColor = 'var(--color-coral-red)';
                 e.target.style.boxShadow = '0 0 0 2px var(--color-lavender-wash)';
               }}
               onBlur={(e) => {
-                e.target.style.borderColor = 'var(--color-mist)';
+                e.target.style.borderColor = 'var(--color-ash)';
                 e.target.style.boxShadow = 'none';
               }}
             />
@@ -200,7 +197,7 @@ export default function AdminLogin() {
               disabled={loading}
               style={{
                 backgroundColor: 'var(--color-paper-white)',
-                border: '1px solid var(--color-mist)',
+                border: '1px solid var(--color-ash)',
                 borderRadius: 'var(--radius-inputs)',
                 padding: '10px 12px',
                 fontSize: 'var(--text-body)',
@@ -210,11 +207,11 @@ export default function AdminLogin() {
                 transition: 'border-color 0.2s, box-shadow 0.2s'
               }}
               onFocus={(e) => {
-                e.target.style.borderColor = 'var(--color-violet-pulse)';
+                e.target.style.borderColor = 'var(--color-coral-red)';
                 e.target.style.boxShadow = '0 0 0 2px var(--color-lavender-wash)';
               }}
               onBlur={(e) => {
-                e.target.style.borderColor = 'var(--color-mist)';
+                e.target.style.borderColor = 'var(--color-ash)';
                 e.target.style.boxShadow = 'none';
               }}
             />
@@ -238,7 +235,7 @@ export default function AdminLogin() {
             type="submit"
             disabled={loading}
             style={{
-              backgroundColor: 'var(--color-violet-pulse)',
+              backgroundColor: 'var(--color-coral-red)',
               color: 'var(--color-paper-white)',
               border: 'none',
               borderRadius: 'var(--radius-buttons)',

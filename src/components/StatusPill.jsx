@@ -9,15 +9,15 @@ const STATUS_CONFIG = {
     },
     RECORDING: {
         text: "말씀해 주세요...",
-        color: "var(--color-violet-pulse)"
+        color: "var(--color-coral-red)"
     },
     TRANSCRIBING: {
         text: "음성을 글자로 바꾸는 중...",
-        color: "var(--color-indigo-ink)"
+        color: "var(--color-slate-blue)"
     },
     THINKING: {
         text: "답변을 생각하는 중...",
-        color: "var(--color-indigo-ink)"
+        color: "var(--color-slate-blue)"
     },
     RESPONSE: {
         text: "답변이 도착했습니다",

@@ -3,7 +3,7 @@
 
 **Theme:** light
 
-SBC reads like a high-end corporate science portal: a canvas blending cool light-blue and warm beige, Geist Sans carrying almost all title text with lightweight, tight letter spacing, and Inter used for description and UI actions. Clean-tech layout flows are anchored by hairline borders, minimal shadows, and precise technical detail tags. A point blue (`#628ad1`) serves as the primary active indicator, supported by dark navy, beige, and duck-egg.
+SBC reads like a high-end corporate science portal: a canvas blending cool light-blue and warm beige, Geist Sans carrying almost all title text with lightweight, tight letter spacing, and Inter used for description and UI actions. Clean-tech layout flows are anchored by hairline borders, minimal shadows, and precise technical detail tags. A point blue (`#6c89ab`) serves as the primary active indicator, supported by dark navy, beige, and duck-egg.
 
 ---
 
@@ -13,11 +13,11 @@ To maintain compatibility with existing codebase variables, the tokens are mappe
 
 | Token Name | original CSS Variable | SBC Hex | Role & Mapping |
 |------------|-----------------------|-----------------|----------------|
-| **Point Blue** | `--color-violet-pulse` | `#628ad1` | Primary CTA, active status dot, brand blue points. |
-| **Dark Blue** | `--color-indigo-ink` | `#3d5e86` | Secondary accent, link hover, active text emphasis. |
+| **Coral Red** | `--color-coral-red` | `#ff6b5c` | Primary CTA, active status dot, brand red points. |
+| **Slate Blue** | `--color-slate-blue` | `#6c89ab` | Secondary accent, link hover, active text emphasis. |
 | **Light Blue** | `--color-lavender-wash` | `#d3e7ff` | Soft tinted background for info boxes or highlights. |
 | **Duck Egg Blue** | `--color-iris-glow` | `#f1f5f8` | Recessed container background, light-grey-blue. |
-| **Active Accent** | `--color-ledger-green` | `#628ad1` | point blue is utilized for positive states/highlights. |
+| **Active Accent** | `--color-ledger-green` | `#6c89ab` | point blue is utilized for positive states/highlights. |
 | **White Canvas** | `--color-paper-white` | `#ffffff` | Primary content panels, card fills, modal background. |
 | **Warm Beige** | `--color-bone` | `#f1f0eb` | Soft background surface, recessed pages, footer panels. |
 | **Warm Pebble** | `--color-marble` | `#f1f0eb` | Soft alert banners, developer info bars. |
@@ -40,6 +40,25 @@ To maintain compatibility with existing codebase variables, the tokens are mappe
 
 ---
 
+## Tokens — Icons
+
+### Google Material Symbols
+* **Style:** Outlined (`material-symbols-outlined`)
+* **Role:** Global icon system for the entire application. All icons (chevrons, hamburger menu, close buttons, action icons) must strictly use Google Material Symbols to maintain a cohesive, modern, and unified UI.
+* **Usage:** Use the web font via `<span className="material-symbols-outlined">icon_name</span>` or use the exact SVG paths exported from Google Material Symbols.
+
+---
+
+## Tokens — UI Components
+
+### Buttons
+* **Primary Story Button (`.sbc-btn-story`)**:
+  * **Role:** The primary action button used globally across the site for key call-to-actions (e.g., Hero sections, About, Tech, Instagram).
+  * **Design:** A pill-shaped button with a light background (`var(--color-bone)`), dark text (`var(--color-graphite)`), and a subtle border. It includes an inline Google Material Symbol (usually `arrow_outward`) indicating action.
+  * **Usage:** Always use this class when creating primary action buttons to maintain a unified, elegant, and high-tech editorial feel. Avoid creating one-off button styles like `.sbc-instagram-btn`.
+
+---
+
 ## Tokens — Spacing & Shapes
 
 ### Border Radius
@@ -56,5 +75,5 @@ To maintain compatibility with existing codebase variables, the tokens are mappe
 ---
 
 ## Background Shader Atmosphere (VisualizerCanvas)
-* Ambient background represents the SBC homepage header gradient: transitioning between Blue (`#628ad1`), Dark Blue (`#3d5e86`), Beige (`#f1f0eb`), and Duck Egg Blue (`#f1f5f8`). 
+* Ambient background represents the SBC homepage header gradient: transitioning between Blue (`#77A8FF`), Warm Peach (`#FFC086`), Beige (`#f1f0eb`), and Duck Egg Blue (`#f1f5f8`). 
 * Smooth fluid animation remains running at very low speed (`u_time * 0.05`).

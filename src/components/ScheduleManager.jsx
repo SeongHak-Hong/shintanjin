@@ -186,7 +186,7 @@ export default function ScheduleManager() {
         <button
           onClick={handleOpenAdd}
           style={{
-            backgroundColor: 'var(--color-violet-pulse)',
+            backgroundColor: 'var(--color-coral-red)',
             color: 'var(--color-paper-white)',
             border: 'none',
             borderRadius: 'var(--radius-buttons)', // 9999px
@@ -257,7 +257,7 @@ export default function ScheduleManager() {
               {schedules.map((schedule) => (
                 <tr key={schedule.id} style={{
                   borderBottom: '1px solid var(--color-ash)',
-                  color: 'var(--color-iron)',
+                  color: 'var(--color-slate)',
                   transition: 'background-color 0.15s'
                 }}
                 onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'var(--color-bone)'}
@@ -270,7 +270,7 @@ export default function ScheduleManager() {
                     <span style={{
                       display: 'inline-block',
                       backgroundColor: schedule.category === '예배' ? 'var(--color-lavender-wash)' : '#f0fdf4',
-                      color: schedule.category === '예배' ? 'var(--color-violet-pulse)' : '#166534',
+                      color: schedule.category === '예배' ? 'var(--color-coral-red)' : '#166534',
                       fontSize: '11px',
                       fontWeight: 'var(--font-weight-bold)',
                       padding: '2px 8px',
@@ -292,7 +292,7 @@ export default function ScheduleManager() {
                         style={{
                           background: 'none',
                           border: 'none',
-                          color: 'var(--color-indigo-ink)',
+                          color: 'var(--color-slate-blue)',
                           cursor: 'pointer',
                           fontSize: '13px',
                           fontWeight: 'var(--font-weight-medium)'
@@ -391,7 +391,7 @@ export default function ScheduleManager() {
                     value={formData.date} 
                     onChange={(e) => setFormData({...formData, date: e.target.value})}
                     style={{
-                      border: '1px solid var(--color-mist)',
+                      border: '1px solid var(--color-ash)',
                       borderRadius: 'var(--radius-inputs)',
                       padding: '8px 12px',
                       fontSize: '14px',
@@ -406,7 +406,7 @@ export default function ScheduleManager() {
                     value={formData.category} 
                     onChange={(e) => setFormData({...formData, category: e.target.value})}
                     style={{
-                      border: '1px solid var(--color-mist)',
+                      border: '1px solid var(--color-ash)',
                       borderRadius: 'var(--radius-inputs)',
                       padding: '8px 12px',
                       fontSize: '14px',
@@ -430,7 +430,7 @@ export default function ScheduleManager() {
                   onChange={(e) => setFormData({...formData, title: e.target.value})}
                   placeholder="예: 여름 성경학교 오리엔테이션"
                   style={{
-                    border: '1px solid var(--color-mist)',
+                    border: '1px solid var(--color-ash)',
                     borderRadius: 'var(--radius-inputs)',
                     padding: '8px 12px',
                     fontSize: '14px',
@@ -448,7 +448,7 @@ export default function ScheduleManager() {
                     value={formData.time} 
                     onChange={(e) => setFormData({...formData, time: e.target.value})}
                     style={{
-                      border: '1px solid var(--color-mist)',
+                      border: '1px solid var(--color-ash)',
                       borderRadius: 'var(--radius-inputs)',
                       padding: '8px 12px',
                       fontSize: '14px',
@@ -465,7 +465,7 @@ export default function ScheduleManager() {
                     onChange={(e) => setFormData({...formData, location: e.target.value})}
                     placeholder="예: 교육관 2층 소강당"
                     style={{
-                      border: '1px solid var(--color-mist)',
+                      border: '1px solid var(--color-ash)',
                       borderRadius: 'var(--radius-inputs)',
                       padding: '8px 12px',
                       fontSize: '14px',
@@ -504,7 +504,7 @@ export default function ScheduleManager() {
                 <button
                   type="submit"
                   style={{
-                    backgroundColor: 'var(--color-violet-pulse)',
+                    backgroundColor: 'var(--color-coral-red)',
                     border: 'none',
                     borderRadius: 'var(--radius-buttons)',
                     padding: '8px 16px',

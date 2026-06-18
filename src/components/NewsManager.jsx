@@ -238,7 +238,7 @@ export default function NewsManager() {
         <button
           onClick={handleOpenAdd}
           style={{
-            backgroundColor: 'var(--color-violet-pulse)',
+            backgroundColor: 'var(--color-coral-red)',
             color: 'var(--color-paper-white)',
             border: 'none',
             borderRadius: 'var(--radius-buttons)',
@@ -287,7 +287,7 @@ export default function NewsManager() {
               key={news.id} 
               style={{
                 backgroundColor: 'var(--color-paper-white)',
-                border: news.isPinned ? '1px solid var(--color-violet-pulse)' : '1px solid var(--color-ash)',
+                border: news.isPinned ? '1px solid var(--color-coral-red)' : '1px solid var(--color-ash)',
                 borderRadius: '8px',
                 padding: '20px 24px',
                 boxShadow: news.isPinned ? '0 0 10px rgba(165,101,255,0.05)' : 'var(--shadow-subtle-2)',
@@ -303,7 +303,7 @@ export default function NewsManager() {
                   {news.isPinned && (
                     <span style={{
                       backgroundColor: 'var(--color-lavender-wash)',
-                      color: 'var(--color-violet-pulse)',
+                      color: 'var(--color-coral-red)',
                       fontSize: '11px',
                       fontWeight: 'var(--font-weight-bold)',
                       padding: '2px 8px',
@@ -327,7 +327,7 @@ export default function NewsManager() {
                     style={{
                       background: 'none',
                       border: 'none',
-                      color: 'var(--color-indigo-ink)',
+                      color: 'var(--color-slate-blue)',
                       cursor: 'pointer',
                       fontSize: '13px',
                       fontWeight: 'var(--font-weight-medium)'
@@ -364,7 +364,7 @@ export default function NewsManager() {
               {/* 내용 */}
               <p style={{
                 fontSize: '14px',
-                color: 'var(--color-iron)',
+                color: 'var(--color-slate)',
                 lineHeight: '1.6',
                 whiteSpace: 'pre-wrap'
               }}>
@@ -476,7 +476,7 @@ export default function NewsManager() {
                   onChange={(e) => setFormData({...formData, title: e.target.value})}
                   placeholder="예: 설립 20주년 기념 감사 예배 및 떡 나눔 안내"
                   style={{
-                    border: '1px solid var(--color-mist)',
+                    border: '1px solid var(--color-ash)',
                     borderRadius: 'var(--radius-inputs)',
                     padding: '10px 12px',
                     fontSize: '14px',
@@ -494,7 +494,7 @@ export default function NewsManager() {
                   placeholder="방문자들이 확인할 수 있도록 공지 상세 내용을 적어주세요."
                   rows="6"
                   style={{
-                    border: '1px solid var(--color-mist)',
+                    border: '1px solid var(--color-ash)',
                     borderRadius: 'var(--radius-inputs)',
                     padding: '10px 12px',
                     fontSize: '14px',
@@ -535,7 +535,7 @@ export default function NewsManager() {
                 <button
                   type="submit"
                   style={{
-                    backgroundColor: 'var(--color-violet-pulse)',
+                    backgroundColor: 'var(--color-coral-red)',
                     border: 'none',
                     borderRadius: 'var(--radius-buttons)',
                     padding: '8px 16px',

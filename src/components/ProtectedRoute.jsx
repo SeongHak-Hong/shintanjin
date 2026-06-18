@@ -42,7 +42,7 @@ export default function ProtectedRoute({ children }) {
         alignItems: 'center',
         height: '100vh',
         fontFamily: 'var(--font-twk-lausanne)',
-        color: 'var(--color-graphite)',
+        color: 'var(--color-slate-blue)',
         backgroundColor: 'var(--color-paper-white)'
       }}>
         <div style={{
@@ -55,7 +55,7 @@ export default function ProtectedRoute({ children }) {
             width: '24px',
             height: '24px',
             border: '2px solid var(--color-ash)',
-            borderTop: '2px solid var(--color-violet-pulse)',
+            borderTop: '2px solid var(--color-coral-red)',
             borderRadius: '50%',
             animation: 'spin 1s linear infinite'
           }} />

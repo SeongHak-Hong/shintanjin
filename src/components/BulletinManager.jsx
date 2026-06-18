@@ -470,7 +470,7 @@ export default function BulletinManager() {
               onChange={(e) => setDate(e.target.value)}
               disabled={uploading}
               style={{
-                border: '1px solid var(--color-mist)',
+                border: '1px solid var(--color-ash)',
                 borderRadius: 'var(--radius-inputs)',
                 padding: '8px 12px',
                 fontSize: '14px',
@@ -491,7 +491,7 @@ export default function BulletinManager() {
               disabled={uploading}
               placeholder="예: 2026년 6월 3주차 주보"
               style={{
-                border: '1px solid var(--color-mist)',
+                border: '1px solid var(--color-ash)',
                 borderRadius: 'var(--radius-inputs)',
                 padding: '8px 12px',
                 fontSize: '14px',
@@ -512,7 +512,7 @@ export default function BulletinManager() {
               placeholder="예배 순서, 설교 본문, 교회 소식 등 AI 챗봇이 읽고 답변할 핵심 텍스트를 붙여넣어 주세요."
               rows="5"
               style={{
-                border: '1px solid var(--color-mist)',
+                border: '1px solid var(--color-ash)',
                 borderRadius: 'var(--radius-inputs)',
                 padding: '8px 12px',
                 fontSize: '14px',
@@ -532,7 +532,7 @@ export default function BulletinManager() {
             onDrop={handleDrop}
             onClick={() => !uploading && fileInputRef.current.click()}
             style={{
-              border: dragActive ? '2px dashed var(--color-violet-pulse)' : '2px dashed var(--color-mist)',
+              border: dragActive ? '2px dashed var(--color-coral-red)' : '2px dashed var(--color-ash)',
               borderRadius: '6px',
               padding: '40px 20px',
               textAlign: 'center',
@@ -555,7 +555,7 @@ export default function BulletinManager() {
               disabled={uploading}
             />
             
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={dragActive ? 'var(--color-violet-pulse)' : 'var(--color-slate)'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={dragActive ? 'var(--color-coral-red)' : 'var(--color-slate)'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="17 8 12 3 7 8" />
               <line x1="12" y1="3" x2="12" y2="15" />
@@ -576,11 +576,11 @@ export default function BulletinManager() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px' }}>
                 <span style={{ color: 'var(--color-slate)', fontWeight: 'var(--font-weight-semibold)' }}>업로드 진행률</span>
-                <span style={{ color: 'var(--color-violet-pulse)', fontWeight: 'var(--font-weight-bold)' }}>{progress}%</span>
+                <span style={{ color: 'var(--color-coral-red)', fontWeight: 'var(--font-weight-bold)' }}>{progress}%</span>
               </div>
               <div style={{
                 height: '6px',
-                backgroundColor: 'var(--color-fog)',
+                backgroundColor: 'var(--color-iris-glow)',
                 borderRadius: '9999px',
                 overflow: 'hidden',
                 border: '1px solid var(--color-ash)'
@@ -588,7 +588,7 @@ export default function BulletinManager() {
                 <div style={{
                   height: '100%',
                   width: `${progress}%`,
-                  backgroundColor: 'var(--color-violet-pulse)',
+                  backgroundColor: 'var(--color-coral-red)',
                   transition: 'width 0.1s linear',
                   borderRadius: '9999px'
                 }} />
@@ -688,7 +688,7 @@ export default function BulletinManager() {
                         rel="noreferrer"
                         style={{
                           fontSize: '12px',
-                          color: 'var(--color-indigo-ink)',
+                          color: 'var(--color-slate-blue)',
                           textDecoration: 'none',
                           fontWeight: 'var(--font-weight-medium)'
                         }}
@@ -702,7 +702,7 @@ export default function BulletinManager() {
                       style={{
                         background: 'none',
                         border: 'none',
-                        color: 'var(--color-indigo-ink)',
+                        color: 'var(--color-slate-blue)',
                         cursor: 'pointer',
                         fontSize: '12px',
                         fontWeight: 'var(--font-weight-medium)'
@@ -799,7 +799,7 @@ export default function BulletinManager() {
                   value={editingBulletin.date} 
                   onChange={(e) => setEditingBulletin({...editingBulletin, date: e.target.value})}
                   style={{
-                    border: '1px solid var(--color-mist)',
+                    border: '1px solid var(--color-ash)',
                     borderRadius: 'var(--radius-inputs)',
                     padding: '8px 12px',
                     fontSize: '14px',
@@ -816,7 +816,7 @@ export default function BulletinManager() {
                   value={editingBulletin.title} 
                   onChange={(e) => setEditingBulletin({...editingBulletin, title: e.target.value})}
                   style={{
-                    border: '1px solid var(--color-mist)',
+                    border: '1px solid var(--color-ash)',
                     borderRadius: 'var(--radius-inputs)',
                     padding: '8px 12px',
                     fontSize: '14px',
@@ -833,7 +833,7 @@ export default function BulletinManager() {
                   onChange={(e) => setEditingBulletin({...editingBulletin, content: e.target.value})}
                   rows="6"
                   style={{
-                    border: '1px solid var(--color-mist)',
+                    border: '1px solid var(--color-ash)',
                     borderRadius: 'var(--radius-inputs)',
                     padding: '8px 12px',
                     fontSize: '14px',
@@ -857,12 +857,12 @@ export default function BulletinManager() {
                   disabled={editUploading}
                   style={{
                     fontSize: '13px',
-                    color: 'var(--color-iron)',
+                    color: 'var(--color-slate)',
                     cursor: editUploading ? 'not-allowed' : 'pointer'
                   }}
                 />
                 {editFile && (
-                  <span style={{ fontSize: '11px', color: 'var(--color-violet-pulse)', fontWeight: 'var(--font-weight-medium)' }}>
+                  <span style={{ fontSize: '11px', color: 'var(--color-coral-red)', fontWeight: 'var(--font-weight-medium)' }}>
                     선택된 새 파일: {editFile.name}
                   </span>
                 )}
@@ -870,11 +870,11 @@ export default function BulletinManager() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '4px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px' }}>
                       <span style={{ color: 'var(--color-slate)' }}>새 파일 업로드 중...</span>
-                      <span style={{ color: 'var(--color-violet-pulse)', fontWeight: 'bold' }}>{editProgress}%</span>
+                      <span style={{ color: 'var(--color-coral-red)', fontWeight: 'bold' }}>{editProgress}%</span>
                     </div>
                     <div style={{
                       height: '5px',
-                      backgroundColor: 'var(--color-fog)',
+                      backgroundColor: 'var(--color-iris-glow)',
                       borderRadius: '9999px',
                       overflow: 'hidden',
                       border: '1px solid var(--color-ash)'
@@ -882,7 +882,7 @@ export default function BulletinManager() {
                       <div style={{
                         height: '100%',
                         width: `${editProgress}%`,
-                        backgroundColor: 'var(--color-violet-pulse)',
+                        backgroundColor: 'var(--color-coral-red)',
                         borderRadius: '9999px',
                         transition: 'width 0.1s linear'
                       }} />
@@ -923,7 +923,7 @@ export default function BulletinManager() {
                   type="submit"
                   disabled={editUploading}
                   style={{
-                    backgroundColor: 'var(--color-violet-pulse)',
+                    backgroundColor: 'var(--color-coral-red)',
                     border: 'none',
                     borderRadius: 'var(--radius-buttons)',
                     padding: '8px 16px',

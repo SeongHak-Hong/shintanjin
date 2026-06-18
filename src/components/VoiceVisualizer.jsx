@@ -30,9 +30,9 @@ export default function VoiceVisualizer({
 
     // Toggle button color active look during recording
     const micBtnStyle = status === 'RECORDING' ? {
-        backgroundColor: 'var(--color-indigo-ink)',
+        backgroundColor: 'var(--color-slate-blue)',
         borderColor: 'var(--color-lavender-wash)',
-        boxShadow: '0 0 24px var(--color-indigo-ink)'
+        boxShadow: '0 0 24px var(--color-slate-blue)'
     } : {};
 
     return (

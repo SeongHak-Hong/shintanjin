@@ -92,6 +92,44 @@ const CAPABILITIES_TABS = [
 export default function MainPage() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
+  const [worshipVideoId, setWorshipVideoId] = useState('myMnI5oGxQs'); // Fallback default ID
+
+  useEffect(() => {
+    const fetchLatestWorshipVideo = async () => {
+      try {
+        const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+        if (!apiKey) {
+          console.warn('VITE_YOUTUBE_API_KEY is missing. Using fallback video.');
+          return;
+        }
+
+        const channelId = 'UCj3wg1t2u2eiMQxWIgT2OeQ';
+        const query = encodeURIComponent('주일예배 | 주일2부예배');
+        const url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=10&q=${query}&type=video`;
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.items && data.items.length > 0) {
+          // Filter out Wednesday/Afternoon worships
+          const filteredItems = data.items.filter(item => {
+            const title = item.snippet.title;
+            return !title.includes('수요') && !title.includes('오후');
+          });
+
+          if (filteredItems.length > 0) {
+            setWorshipVideoId(filteredItems[0].id.videoId);
+          } else {
+            setWorshipVideoId(data.items[0].id.videoId);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching YouTube video:', error);
+      }
+    };
+
+    fetchLatestWorshipVideo();
+  }, []);
 
   const videoSectionRef = useRef(null);
   const videoWrapperRef = useRef(null);
@@ -161,6 +199,53 @@ export default function MainPage() {
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [isAtTop, setIsAtTop] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  const footerWrapRef = useRef(null);
+  const nfwRef = useRef(null);
+  const footerRef = useRef(null);
+  const [footerHeight, setFooterHeight] = useState(0);
+
+  // Measure footer height accurately even after images load
+  useEffect(() => {
+    if (footerRef.current) {
+      const observer = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          setFooterHeight(entry.target.offsetHeight);
+        }
+      });
+      observer.observe(footerRef.current);
+      
+      // Initial measurement
+      setFooterHeight(footerRef.current.offsetHeight);
+      
+      return () => observer.disconnect();
+    }
+  }, []);
+
+  // Footer reveal: fixed footer with translateY parallax & welcome section scale (desktop only)
+  useEffect(() => {
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 768px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: nfwRef.current,
+          start: "top top",
+          end: "max",
+          scrub: true,
+        }
+      });
+
+      tl.fromTo(footerRef.current,
+        { y: "15%" },
+        { y: "0%", ease: "none" }
+      ).fromTo(nfwRef.current,
+        { scale: 1, transformOrigin: "bottom center" },
+        { scale: 0.98, ease: "none" },
+        "<" // start at the same time
+      );
+    });
+    return () => mm.revert();
+  }, [footerHeight]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -358,7 +443,8 @@ export default function MainPage() {
   ];
 
   return (
-    <div className="sbc-clone-root">
+    <>
+      <div className="sbc-clone-root" style={{ position: 'relative', zIndex: 1, backgroundColor: 'var(--color-paper-white)', marginBottom: footerHeight }}>
       {/* 1. Header Navigation Bar with Flyout 2-depth Menu */}
       <nav
         className={`sbc-nav ${isNavVisible ? '' : 'sbc-nav-hidden'} ${isAtTop ? 'sbc-nav-top' : ''} ${showFlyout ? 'sbc-nav-flyout-open' : ''}`}
@@ -378,23 +464,19 @@ export default function MainPage() {
               >
                 {menu.label}
                 {menu.children && (
-                  <svg className="sbc-nav-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none">
-                    <path d="M2.5 3.5L5 6.5L7.5 3.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                  <span className="material-symbols-outlined sbc-nav-chevron">expand_more</span>
                 )}
               </span>
             ))}
           </div>
 
           <div className="sbc-nav-actions">
-            <button className="sbc-btn-accent sbc-hide-on-mobile" onClick={handleStartChatbot}>
+            <button className="sbc-btn-story sbc-hide-on-mobile" style={{ gap: 'var(--spacing-8)' }} onClick={handleStartChatbot}>
+              <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>person_add</span>
               새가족 등록
             </button>
             <button className="sbc-hamburger-btn" onClick={toggleMobileMenu}>
-              {/* Google Material Icon: Menu */}
-              <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px" fill="currentColor">
-                <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
-              </svg>
+              <span className="material-symbols-outlined">menu</span>
             </button>
           </div>
         </div>
@@ -418,9 +500,7 @@ export default function MainPage() {
                         <div className="sbc-flyout-slot-measure">
                           {menu.label}
                           {menu.children && (
-                            <svg className="sbc-nav-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none">
-                              <path d="M2.5 3.5L5 6.5L7.5 3.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
+                            <span className="material-symbols-outlined sbc-nav-chevron">expand_more</span>
                           )}
                         </div>
 
@@ -429,9 +509,7 @@ export default function MainPage() {
                             {activeMenuData.children.map((child) => (
                               <a key={child.id} className="sbc-flyout-link" href={`#${child.id}`}>
                                 <span className="sbc-flyout-link-text">{child.label}</span>
-                                <svg className="sbc-flyout-link-arrow" width="14" height="14" viewBox="0 0 20 20" fill="none">
-                                  <path d="M5 10H15M15 10L10 5M15 10L10 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                </svg>
+                                <span className="material-symbols-outlined sbc-flyout-link-arrow">arrow_forward</span>
                               </a>
                             ))}
                           </div>
@@ -461,10 +539,7 @@ export default function MainPage() {
       >
         <div className="sbc-mobile-menu-header">
           <button className="sbc-mobile-close-btn" onClick={toggleMobileMenu}>
-            {/* Google Material Icon: Close */}
-            <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px" fill="currentColor">
-              <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
-            </svg>
+            <span className="material-symbols-outlined">close</span>
           </button>
         </div>
         
@@ -478,15 +553,13 @@ export default function MainPage() {
                 >
                   <span className="sbc-mobile-accordion-title">{menu.label}</span>
                   {menu.children ? (
-                    <svg 
-                      className={`sbc-mobile-accordion-chevron ${mobileActiveMenu === menu.id ? 'open' : ''}`} 
-                      xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                    >
-                      <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
+                    <span className={`material-symbols-outlined sbc-mobile-accordion-chevron ${mobileActiveMenu === menu.id ? 'open' : ''}`}>
+                      expand_more
+                    </span>
                   ) : (
-                    <svg className="sbc-mobile-accordion-chevron" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none" style={{ visibility: 'hidden' }}>
-                    </svg>
+                    <span className="material-symbols-outlined sbc-mobile-accordion-chevron" style={{ visibility: 'hidden' }}>
+                      expand_more
+                    </span>
                   )}
                 </div>
                 {menu.children && (
@@ -515,10 +588,7 @@ export default function MainPage() {
               handleStartChatbot();
             }}>
               <span className="sbc-mobile-footer-title">새가족 등록</span>
-              {/* Google Material Icon: arrow_outward */}
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor" className="sbc-mobile-footer-icon">
-                <path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/>
-              </svg>
+              <span className="material-symbols-outlined sbc-mobile-footer-icon">arrow_outward</span>
             </div>
           </div>
         </div>
@@ -568,9 +638,7 @@ export default function MainPage() {
                 </p>
                 <button className="sbc-btn-story" onClick={handleStartChatbot}>
                   <span>음성 비서 체험하기</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none" className="sbc-btn-icon">
-                    <path d="M3.67242 12.9971V2.5H4.67242V11.9971H15.7824L15.6133 11.9455L12.4346 8.69261L13.1494 7.99339L17.209 12.1477L17.5508 12.4973L17.209 12.8469L13.1494 17.0012L12.4346 16.302L15.6162 13.0452L15.7753 12.9971H3.67242Z" fill="currentColor"/>
-                  </svg>
+                  <span className="material-symbols-outlined sbc-btn-icon">arrow_outward</span>
                 </button>
               </div>
             </div>
@@ -624,40 +692,31 @@ export default function MainPage() {
         </div>
       </section>
 
-      {/* 4. Modernizing SMR / Technology Section */}
+      {/* 4. Online Worship Video Section */}
       <section className="sbc-section sbc-section-duck-egg">
         <div className="sbc-container">
           <div className="sbc-tech-grid">
-            <h2 className="sbc-heading-style-h3">Modernizing Proven Technology</h2>
+            <h2 className="sbc-heading-style-h3">온라인 예배</h2>
             <div className="sbc-tech-column">
               <p className="sbc-text-medium">
-                We're the only Western advanced small modular reactor (SMR) company modernizing the established, publicly available technology of Japan's High Temperature Engineering Test Reactor, which is capable of producing industrial process heat up to 950 °C.
+                신탄진침례교회의 예배를 온라인으로 함께할 수 있습니다. 장소와 시간에 구애받지 않고, 언제 어디서나 생명력 있는 말씀과 은혜로운 찬양의 자리에 동참해 보세요.
               </p>
-              <button className="sbc-btn-story" onClick={handleStartChatbot}>
-                <span>기술 사양 살펴보기</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none" className="sbc-btn-icon">
-                  <path d="M3.67242 12.9971V2.5H4.67242V11.9971H15.7824L15.6133 11.9455L12.4346 8.69261L13.1494 7.99339L17.209 12.1477L17.5508 12.4973L17.209 12.8469L13.1494 17.0012L12.4346 16.302L15.6162 13.0452L15.7753 12.9971H3.67242Z" fill="currentColor"/>
-                </svg>
+              <button className="sbc-btn-story" onClick={() => window.open('https://www.youtube.com/@sbc6312', '_blank')}>
+                <span>교회 유튜브 바로가기</span>
+                <span className="material-symbols-outlined sbc-btn-icon">arrow_outward</span>
               </button>
             </div>
           </div>
 
           <div className="sbc-tech-card-wrapper">
-            <div className="sbc-tech-image-container">
-              <img 
-                src="https://cdn.prod.website-files.com/695e44c5cda75248659e97f1/69aada08819f41c24bb14aa6_home-building.webp" 
-                alt="신탄진침례교회 modern building complex" 
-                className="sbc-tech-img"
-              />
-              <div className="sbc-tech-overlay-card">
-                <div className="sbc-card-label-dot">
-                  <span className="sbc-card-dot"></span>
-                  <span className="sbc-card-label">Design Meets Resilience</span>
-                </div>
-                <p className="sbc-card-body">
-                  Our SMR facility will be a next-generation energy campus, defined by contemporary architectural elements - softened structural lines and sculpted façades that integrate thoughtfully with surrounding environments.
-                </p>
-              </div>
+            <div style={{ paddingTop: '56.25%', position: 'relative', borderRadius: '12px', overflow: 'hidden', boxShadow: 'var(--shadow-md)' }}>
+              <iframe 
+                src={`https://www.youtube.com/embed/${worshipVideoId}`} 
+                title="주일 예배 영상" 
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }} 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowFullScreen>
+              </iframe>
             </div>
           </div>
         </div>
@@ -800,9 +859,7 @@ export default function MainPage() {
               <div style={{ marginTop: '32px' }}>
                 <button className="sbc-btn-story" onClick={handleStartChatbot}>
                   <span>AI 음성 서비스 연동하기</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none" className="sbc-btn-icon">
-                    <path d="M3.67242 12.9971V2.5H4.67242V11.9971H15.7824L15.6133 11.9455L12.4346 8.69261L13.1494 7.99339L17.209 12.1477L17.5508 12.4973L17.209 12.8469L13.1494 17.0012L12.4346 16.302L15.6162 13.0452L15.7753 12.9971H3.67242Z" fill="currentColor"/>
-                  </svg>
+                  <span className="material-symbols-outlined sbc-btn-icon">arrow_outward</span>
                 </button>
               </div>
             </div>
@@ -829,11 +886,9 @@ export default function MainPage() {
               <p className="sbc-instagram-desc sbc-text-medium">
                 주일의 예배당을 넘어, 성도들의 평범한 일상 속에서도 하나님의 은혜는 계속됩니다. 함께 기도하고, 땀 흘려 봉사하고, 해맑게 웃는 신탄진침례교회의 따뜻한 순간들을 사진으로 기록합니다. 우리의 걸음이 담긴 온라인 갤러리에 방문하셔서, 서로의 삶을 응원하고 소통하는 기쁨을 누려보세요.
               </p>
-              <button className="sbc-instagram-btn" onClick={() => window.open('https://instagram.com', '_blank')}>
-                인스타그램 방문하기
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
+              <button className="sbc-btn-story" onClick={() => window.open('https://instagram.com', '_blank')}>
+                <span>인스타그램 방문하기</span>
+                <span className="material-symbols-outlined sbc-btn-icon">arrow_outward</span>
               </button>
             </div>
           </div>
@@ -851,38 +906,82 @@ export default function MainPage() {
         </div>
       </section>
 
-      {/* 8. Footer Section */}
-      <footer className="sbc-footer">
-        <div className="sbc-container">
-          <div className="sbc-footer-top">
-            <div className="sbc-footer-brand">
-              <div className="sbc-nav-brand" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                <img src={sbcLogo} alt="신탄진침례교회 로고" height="40" />
+      {/* 8. New Family Welcome & Footer Section */}
+      <div className="sbc-footer-wrap" ref={footerWrapRef}>
+        <section className="sbc-new-family-welcome" ref={nfwRef}>
+          <div className="sbc-container sbc-nfw-inner">
+            <div className="sbc-nfw-content">
+              <div className="sbc-nfw-icon">
+                <span className="material-symbols-outlined">favorite</span>
               </div>
+              <h2 className="sbc-nfw-title">
+                새가족 환영. 신탄진침례교회는<br />
+                처음 오신 여러분을 진심으로<br />
+                환영하고 축복합니다.
+              </h2>
+              <button className="sbc-btn-accent sbc-nfw-btn">
+                <span>새가족 등록 안내</span>
+                <span className="material-symbols-outlined">arrow_outward</span>
+              </button>
             </div>
-
-            <div className="sbc-footer-nav">
-              <span className="sbc-footer-link">Company</span>
-              <span className="sbc-footer-link">Technology</span>
-              <span className="sbc-footer-link">Solutions</span>
-              <span className="sbc-footer-link">Our Edge</span>
-              <span className="sbc-footer-link">Our Team</span>
-              <span className="sbc-footer-link">Investors</span>
-              <span className="sbc-footer-link">News</span>
+            <div className="sbc-nfw-images">
+              <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=600&auto=format&fit=crop" alt="새가족 환영 1" className="sbc-nfw-img" />
+              <img src="https://images.unsplash.com/photo-1438032005730-c779502df39b?q=80&w=600&auto=format&fit=crop" alt="새가족 환영 2" className="sbc-nfw-img" />
             </div>
           </div>
+        </section>
+      </div>
+      </div>
+
+      <footer className="sbc-footer" ref={footerRef} style={{ position: 'fixed', bottom: 0, left: 0, width: '100%', zIndex: 0 }}>
+        <div className="sbc-container sbc-footer-inner">
+          <div className="sbc-footer-top">
+            <div className="sbc-footer-slogan-wrap">
+              <h2 className="sbc-footer-slogan">
+                세상을 살리는 복음<br />
+                은혜가 머무는 신탄진침례교회
+              </h2>
+            </div>
+            <div className="sbc-footer-nav-grid">
+              <div className="sbc-footer-col">
+                <span className="sbc-footer-link">교회소개</span>
+                <span className="sbc-footer-link">예배찬양</span>
+                <span className="sbc-footer-link">양육훈련</span>
+                <span className="sbc-footer-link">다음세대</span>
+                <span className="sbc-footer-link">선교전도</span>
+              </div>
+              <div className="sbc-footer-col">
+                <span className="sbc-footer-link">교회소식 및 주보</span>
+                <span className="sbc-footer-link">교우동정 및 갤러리</span>
+                <span className="sbc-footer-link">사역 일정</span>
+                <span className="sbc-footer-link">오시는 길</span>
+              </div>
+              <div className="sbc-footer-col">
+                <span className="sbc-footer-link" onClick={() => window.open('https://youtube.com/@sbc6312', '_blank')}>YouTube</span>
+                <span className="sbc-footer-link" onClick={() => window.open('https://instagram.com/shintanjin_baptist_church', '_blank')}>Instagram</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="sbc-footer-space"></div>
 
           <div className="sbc-footer-bottom">
-            <span className="sbc-footer-copy">
-              &copy; {new Date().getFullYear()} 신탄진침례교회 Inc. All rights reserved.
-            </span>
-            <div className="sbc-footer-sub-links">
-              <span>Privacy Policy</span>
-              <span>Terms of Service</span>
+            <div className="sbc-footer-brand" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <div className="sbc-footer-logo-wrap">
+                <img src={sbcLogo} alt="신탄진침례교회 로고" className="sbc-footer-logo" />
+              </div>
+            </div>
+            
+            <div className="sbc-footer-copy-wrap">
+              <div className="sbc-footer-sub-links-wrap">
+                <span className="sbc-footer-sub-link">개인정보처리방침</span>
+                <span className="sbc-footer-sub-link">이용약관</span>
+              </div>
+              <span className="sbc-footer-copy">&copy; {new Date().getFullYear()} 신탄진침례교회. All rights reserved.</span>
             </div>
           </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
