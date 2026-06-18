@@ -710,7 +710,7 @@ export default function MainPage() {
           </div>
 
           <div className="sbc-tech-card-wrapper">
-            <div style={{ paddingTop: '56.25%', position: 'relative', borderRadius: '12px', overflow: 'hidden', boxShadow: 'var(--shadow-md)' }}>
+            <div style={{ paddingTop: '56.25%', position: 'relative', borderRadius: 'var(--radius-large-panels)', overflow: 'hidden', boxShadow: 'var(--shadow-md)' }}>
               <iframe 
                 src={`https://www.youtube.com/embed/${worshipVideoId}`} 
                 title="주일 예배 영상" 
