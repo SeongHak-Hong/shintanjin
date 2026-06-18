@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTE_CHATBOT } from '../constants/routes';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { BlurFade } from './ui/blur-fade';
 import sbcLogo from '../assets/SBC-logo.svg';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -600,7 +601,7 @@ export default function MainPage() {
         <div className="sbc-hero-container">
           <div className="sbc-hero-top-spacing"></div>
           
-          <h2 className="sbc-hero-title">
+          <BlurFade delay={0} inView><h2 className="sbc-hero-title">
             <span className="sbc-title-line">Powering</span>
             <span className="sbc-title-span-wrap">
               <span className="sbc-title-span-the">the</span>
@@ -612,13 +613,13 @@ export default function MainPage() {
               src="https://cdn.prod.website-files.com/695e44c5cda75248659e97f1/696a6637ba3fff5cf7e4326a_zj-home-atf-reactor.webp" 
               alt="Compact nuclear reactor illustration" 
             />
-          </h2>
+          </h2></BlurFade>
 
           <div className="sbc-hero-bottom">
             <div className="sbc-hero-content">
-              <h1 className="sbc-hero-caption">
+              <BlurFade delay={0.15} inView><h1 className="sbc-hero-caption">
                 Clean Heat and Electricity to Power a World of Industrial Applications
-              </h1>
+              </h1></BlurFade>
               <div className="sbc-hero-line"></div>
             </div>
           </div>
@@ -631,15 +632,15 @@ export default function MainPage() {
         <div className="sbc-about-area">
           <div className="sbc-container">
             <div className="sbc-about-grid">
-              <h2 className="sbc-label-style-2">The Name Reflects our Mission</h2>
+              <BlurFade delay={0} inView><h2 className="sbc-label-style-2">The Name Reflects our Mission</h2></BlurFade>
               <div className="sbc-about-text-column">
-                <p className="sbc-heading-style-h5">
+                <BlurFade delay={0.15} inView><p className="sbc-heading-style-h5">
                   Projections by the U.S. Department of Energy show that annual global energy demand by the year 2050 will reach one billion times one trillion (zetta) units of energy (joules).
-                </p>
-                <button className="sbc-btn-story" onClick={handleStartChatbot}>
+                </p></BlurFade>
+                <BlurFade delay={0.3} inView><button className="sbc-btn-story" onClick={handleStartChatbot}>
                   <span>음성 비서 체험하기</span>
                   <span className="material-symbols-outlined sbc-btn-icon">arrow_outward</span>
-                </button>
+                </button></BlurFade>
               </div>
             </div>
           </div>
@@ -652,9 +653,9 @@ export default function MainPage() {
               <div className="sbc-video-grid">
                 {/* Left Column: Text (1fr) */}
                 <div className="sbc-video-left-col" ref={videoTextRef}>
-                  <p className="sbc-scroll-flip-text">
+                  <BlurFade delay={0} inView><p className="sbc-scroll-flip-text">
                     Our name, 신탄진침례교회, reflects our commitment to being part of the solution for meeting this tremendous need by providing clean, reliable heat and power.
-                  </p>
+                  </p></BlurFade>
                 </div>
                 
                 {/* Right Column: Video (2fr) — scroll-flip origin */}
@@ -696,15 +697,15 @@ export default function MainPage() {
       <section className="sbc-section sbc-section-duck-egg">
         <div className="sbc-container">
           <div className="sbc-tech-grid">
-            <h2 className="sbc-heading-style-h3">온라인 예배</h2>
+            <BlurFade delay={0} inView><h2 className="sbc-heading-style-h3">온라인 예배</h2></BlurFade>
             <div className="sbc-tech-column">
-              <p className="sbc-text-medium">
+              <BlurFade delay={0.15} inView><p className="sbc-text-medium">
                 신탄진침례교회의 예배를 온라인으로 함께할 수 있습니다. 장소와 시간에 구애받지 않고, 언제 어디서나 생명력 있는 말씀과 은혜로운 찬양의 자리에 동참해 보세요.
-              </p>
-              <button className="sbc-btn-story" onClick={() => window.open('https://www.youtube.com/@sbc6312', '_blank')}>
+              </p></BlurFade>
+              <BlurFade delay={0.3} inView><button className="sbc-btn-story" onClick={() => window.open('https://www.youtube.com/@sbc6312', '_blank')}>
                 <span>교회 유튜브 바로가기</span>
                 <span className="material-symbols-outlined sbc-btn-icon">arrow_outward</span>
-              </button>
+              </button></BlurFade>
             </div>
           </div>
 
@@ -726,11 +727,11 @@ export default function MainPage() {
       <section className="sbc-section sbc-section-duck-egg-dark">
         <div className="sbc-container">
           <div className="sbc-tech-grid">
-            <h2 className="sbc-label-style-2">Intelligent Systems</h2>
+            <BlurFade delay={0} inView><h2 className="sbc-label-style-2">Intelligent Systems</h2></BlurFade>
             <div className="sbc-tech-column">
-              <p className="sbc-heading-style-h5">
+              <BlurFade delay={0.15} inView><p className="sbc-heading-style-h5">
                 Our modernized design leverages artificial intelligence and AI-based digital twins to streamline operations, cut costs, accelerate delivery, and minimize human error.
-              </p>
+              </p></BlurFade>
             </div>
           </div>
 
@@ -760,34 +761,34 @@ export default function MainPage() {
 
             {/* Grid details */}
             <div className="sbc-details-grid">
-              <div className="sbc-detail-card">
+              <BlurFade delay={0.3} inView><div className="sbc-detail-card">
                 <h3 className="sbc-detail-title">Heat</h3>
                 <div className="sbc-detail-line"></div>
                 <p className="sbc-detail-desc">
                   High-temperature heat opens up the widest range of applications, from Chemicals to Steelmaking and District heating.
                 </p>
-              </div>
-              <div className="sbc-detail-card">
+              </div></BlurFade>
+              <BlurFade delay={0.45} inView><div className="sbc-detail-card">
                 <h3 className="sbc-detail-title">Heat &amp; Power</h3>
                 <div className="sbc-detail-line"></div>
                 <p className="sbc-detail-desc">
                   Can produce heat and electricity for Oil &amp; Gas facilities, Mining operations &amp; other industrial facilities.
                 </p>
-              </div>
-              <div className="sbc-detail-card">
+              </div></BlurFade>
+              <BlurFade delay={0.6} inView><div className="sbc-detail-card">
                 <h3 className="sbc-detail-title">Hydrogen</h3>
                 <div className="sbc-detail-line"></div>
                 <p className="sbc-detail-desc">
                   Highly efficient hydrogen production for Chemicals (ammonia, polymers, e-fuels), Oil &amp; Gas facilities, and Sustainable Aviation Fuel.
                 </p>
-              </div>
-              <div className="sbc-detail-card">
+              </div></BlurFade>
+              <BlurFade delay={0.75} inView><div className="sbc-detail-card">
                 <h3 className="sbc-detail-title">Electricity</h3>
                 <div className="sbc-detail-line"></div>
                 <p className="sbc-detail-desc">
                   Designed to produce 24/7 clean power for Data Centers, Microgrids, and Residential and Commercial users.
                 </p>
-              </div>
+              </div></BlurFade>
             </div>
           </div>
         </div>
@@ -797,14 +798,14 @@ export default function MainPage() {
       <section className="sbc-section sbc-section-dark">
         <div className="sbc-container">
           <div className="sbc-capabilities-intro">
-            <h2 className="sbc-heading-style-h3 text-white">Unmatched Heat Capabilities</h2>
-            <p className="sbc-text-medium text-grey-350">
+            <BlurFade delay={0} inView><h2 className="sbc-heading-style-h3 text-white">Unmatched Heat Capabilities</h2></BlurFade>
+            <BlurFade delay={0.15} inView><p className="sbc-text-medium text-grey-350">
               Our ZJ advanced SMR will be designed to operate at temperatures up to 950 °C, which is approximately 600 °C higher than conventional water-cooled reactors, while also providing reliable power.
-            </p>
+            </p></BlurFade>
           </div>
 
           {/* Interactive tab block */}
-          <div className="sbc-tab-container">
+          <BlurFade delay={0.3} inView><div className="sbc-tab-container">
             <div className="sbc-tab-nav">
               {CAPABILITIES_TABS.map((tab, idx) => (
                 <button 
@@ -841,7 +842,7 @@ export default function MainPage() {
                 </div>
               </div>
             </div>
-          </div>
+          </div></BlurFade>
         </div>
       </section>
 
@@ -850,18 +851,18 @@ export default function MainPage() {
         <div className="sbc-container">
           <div className="sbc-energy-grid">
             <div className="sbc-energy-text">
-              <h2 className="sbc-heading-style-h3">24/7 Clean Energy as a Service</h2>
-              <p className="sbc-card-body text-grey-750">
+              <BlurFade delay={0} inView><h2 className="sbc-heading-style-h3">24/7 Clean Energy as a Service</h2></BlurFade>
+              <BlurFade delay={0.15} inView><p className="sbc-card-body text-grey-750">
                 We provide our customers with a range of financing and operational benefits, including the option to operate solely as off-takers.<br/><br/>
                 Through this Energy-as-a-Service approach, we own, operate, and staff nuclear facilities, freeing our customers from the complexities of managing a nuclear plant.
-              </p>
+              </p></BlurFade>
               
-              <div style={{ marginTop: '32px' }}>
+              <BlurFade delay={0.3} inView><div style={{ marginTop: '32px' }}>
                 <button className="sbc-btn-story" onClick={handleStartChatbot}>
                   <span>AI 음성 서비스 연동하기</span>
                   <span className="material-symbols-outlined sbc-btn-icon">arrow_outward</span>
                 </button>
-              </div>
+              </div></BlurFade>
             </div>
             
             <div className="sbc-energy-image-panel">
@@ -879,17 +880,17 @@ export default function MainPage() {
       <section className="sbc-instagram-section">
         <div className="sbc-container">
           <div className="sbc-instagram-header">
-            <h2 className="sbc-instagram-title sbc-heading-style-h3">
+            <BlurFade delay={0} inView><h2 className="sbc-instagram-title sbc-heading-style-h3">
               삶이 되는 예배
-            </h2>
+            </h2></BlurFade>
             <div className="sbc-instagram-desc-wrap">
-              <p className="sbc-instagram-desc sbc-text-medium">
+              <BlurFade delay={0.15} inView><p className="sbc-instagram-desc sbc-text-medium">
                 주일의 예배당을 넘어, 성도들의 평범한 일상 속에서도 하나님의 은혜는 계속됩니다. 함께 기도하고, 땀 흘려 봉사하고, 해맑게 웃는 신탄진침례교회의 따뜻한 순간들을 사진으로 기록합니다. 우리의 걸음이 담긴 온라인 갤러리에 방문하셔서, 서로의 삶을 응원하고 소통하는 기쁨을 누려보세요.
-              </p>
-              <button className="sbc-btn-story" onClick={() => window.open('https://instagram.com', '_blank')}>
+              </p></BlurFade>
+              <BlurFade delay={0.3} inView><button className="sbc-btn-story" onClick={() => window.open('https://instagram.com', '_blank')}>
                 <span>인스타그램 방문하기</span>
                 <span className="material-symbols-outlined sbc-btn-icon">arrow_outward</span>
-              </button>
+              </button></BlurFade>
             </div>
           </div>
         </div>
@@ -911,18 +912,18 @@ export default function MainPage() {
         <section className="sbc-new-family-welcome" ref={nfwRef}>
           <div className="sbc-container sbc-nfw-inner">
             <div className="sbc-nfw-content">
-              <div className="sbc-nfw-icon">
+              <BlurFade delay={0} inView><div className="sbc-nfw-icon">
                 <span className="material-symbols-outlined">favorite</span>
-              </div>
-              <h2 className="sbc-nfw-title">
+              </div></BlurFade>
+              <BlurFade delay={0.15} inView><h2 className="sbc-nfw-title">
                 새가족 환영. 신탄진침례교회는<br />
                 처음 오신 여러분을 진심으로<br />
                 환영하고 축복합니다.
-              </h2>
-              <button className="sbc-btn-accent sbc-nfw-btn">
+              </h2></BlurFade>
+              <BlurFade delay={0.3} inView><button className="sbc-btn-accent sbc-nfw-btn">
                 <span>새가족 등록 안내</span>
                 <span className="material-symbols-outlined">arrow_outward</span>
-              </button>
+              </button></BlurFade>
             </div>
             <div className="sbc-nfw-images">
               <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=600&auto=format&fit=crop" alt="새가족 환영 1" className="sbc-nfw-img" />

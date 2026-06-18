@@ -1210,7 +1210,8 @@ body.no-scroll {
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--color-graphite);
-  margin-bottom: 0;
+  margin-bottom: var(--spacing-24);
+  /* 1.5rem */
 }
 
 .sbc-heading-style-h3.text-white {
