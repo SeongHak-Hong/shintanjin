@@ -7,6 +7,60 @@ import sbcLogo from '../assets/SBC-logo.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Navigation menu data with 2-depth sub-items
+const NAV_MENU_DATA = [
+  {
+    id: 'about',
+    label: '교회소개',
+    desc: '은혜가 머무는 신탄진교회의 비전과 섬기는 사람들의 이야기',
+    children: [
+      { id: 'greeting', label: '인사말 및 비전' },
+      { id: 'worship-direction', label: '예배 및 오시는 길' },
+      { id: 'leaders', label: '섬기는 사람들' },
+    ],
+  },
+  {
+    id: 'worship',
+    label: '예배찬양',
+    desc: '영혼을 깨우는 생명력 있는 말씀과 깊은 울림이 있는 찬양',
+    children: [
+      { id: 'sermons', label: '주일 및 수요 말씀' },
+      { id: 'choir-gallery', label: '찬양대 갤러리' },
+    ],
+  },
+  {
+    id: 'training',
+    label: '양육훈련',
+    desc: '신앙의 뿌리를 내리고 삶을 나누는 따뜻한 성장의 시간',
+    children: [
+      { id: 'newcomer', label: '새가족 안내' },
+      { id: 'smallgroup', label: '교구 및 소그룹' },
+    ],
+  },
+  {
+    id: 'nextgen',
+    label: '다음세대',
+    desc: '말씀 안에서 꿈을 키우며 자라나는 우리 교회의 빛나는 미래',
+    children: null, // 단일 페이지
+  },
+  {
+    id: 'mission',
+    label: '선교전도',
+    desc: '이웃과 열방을 향해 예수 그리스도의 사랑을 흘려보내는 발걸음',
+    children: null, // 단일 페이지
+  },
+  {
+    id: 'community',
+    label: '나눔터',
+    desc: '매주 업데이트되는 교회의 생생한 소식과 성도들의 아름다운 일상',
+    children: [
+      { id: 'news', label: '교회 소식 및 주보' },
+      { id: 'fellowship', label: '교우동정 및 갤러리' },
+      { id: 'schedule', label: '사역 일정' },
+    ],
+  },
+];
+
 // Capabilities tab content configuration
 const CAPABILITIES_TABS = [
   {
@@ -50,6 +104,58 @@ export default function MainPage() {
   const handleStartChatbot = () => {
     navigate(ROUTE_CHATBOT);
   };
+
+  // Flyout navigation hover state
+  const [hoveredMenu, setHoveredMenu] = useState(null);
+  const menuCloseTimerRef = useRef(null);
+
+  const handleMenuEnter = useCallback((menuId) => {
+    if (menuCloseTimerRef.current) {
+      clearTimeout(menuCloseTimerRef.current);
+      menuCloseTimerRef.current = null;
+    }
+    setHoveredMenu(menuId);
+  }, []);
+
+  const handleMenuLeave = useCallback(() => {
+    menuCloseTimerRef.current = setTimeout(() => {
+      setHoveredMenu(null);
+      menuCloseTimerRef.current = null;
+    }, 150);
+  }, []);
+
+  // Clean up timer on unmount
+  useEffect(() => {
+    return () => {
+      if (menuCloseTimerRef.current) clearTimeout(menuCloseTimerRef.current);
+    };
+  }, []);
+
+  // Determine the currently active flyout data
+  const activeMenuData = hoveredMenu
+    ? NAV_MENU_DATA.find((m) => m.id === hoveredMenu)
+    : null;
+  const showFlyout = !!activeMenuData;
+
+  // Mobile menu states
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileActiveMenu, setMobileActiveMenu] = useState(null);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   // Header scroll visibility logic
   const [isNavVisible, setIsNavVisible] = useState(true);
@@ -253,30 +359,170 @@ export default function MainPage() {
 
   return (
     <div className="sbc-clone-root">
-      {/* 1. Header Navigation Bar */}
-      <nav className={`sbc-nav ${isNavVisible ? '' : 'sbc-nav-hidden'} ${isAtTop ? 'sbc-nav-top' : ''}`}>
+      {/* 1. Header Navigation Bar with Flyout 2-depth Menu */}
+      <nav
+        className={`sbc-nav ${isNavVisible ? '' : 'sbc-nav-hidden'} ${isAtTop ? 'sbc-nav-top' : ''} ${showFlyout ? 'sbc-nav-flyout-open' : ''}`}
+        onMouseLeave={handleMenuLeave}
+      >
         <div className="sbc-nav-container">
           <div className="sbc-nav-brand" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img src={sbcLogo} alt="신탄진침례교회 로고" height="40" className="sbc-logo-image" />
           </div>
 
           <div className="sbc-nav-menu">
-            <span className="sbc-nav-item">교회소개</span>
-            <span className="sbc-nav-item">예배찬양</span>
-            <span className="sbc-nav-item">양육훈련</span>
-            <span className="sbc-nav-item">다음세대</span>
-            <span className="sbc-nav-item">선교전도</span>
-            <span className="sbc-nav-item">나눔터</span>
+            {NAV_MENU_DATA.map((menu) => (
+              <span
+                key={menu.id}
+                className={`sbc-nav-item ${hoveredMenu === menu.id ? 'sbc-nav-item-active' : ''}`}
+                onMouseEnter={() => handleMenuEnter(menu.id)}
+              >
+                {menu.label}
+                {menu.children && (
+                  <svg className="sbc-nav-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <path d="M2.5 3.5L5 6.5L7.5 3.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                )}
+              </span>
+            ))}
           </div>
 
           <div className="sbc-nav-actions">
-            {/* Action button for New Member Registration */}
-            <button className="sbc-btn-accent" onClick={handleStartChatbot}>
+            <button className="sbc-btn-accent sbc-hide-on-mobile" onClick={handleStartChatbot}>
               새가족 등록
+            </button>
+            <button className="sbc-hamburger-btn" onClick={toggleMobileMenu}>
+              {/* Google Material Icon: Menu */}
+              <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px" fill="currentColor">
+                <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
+              </svg>
             </button>
           </div>
         </div>
+
+        {/* Flyout 2-depth Sub-menu Panel */}
+        <div
+          className={`sbc-flyout-panel ${showFlyout ? 'sbc-flyout-panel-open' : ''}`}
+          onMouseEnter={() => { if (hoveredMenu) handleMenuEnter(hoveredMenu); }}
+          onMouseLeave={handleMenuLeave}
+        >
+          <div className="sbc-flyout-inner">
+            {showFlyout && (
+              <>
+                <div className="sbc-flyout-category-wrap">
+                  <span className="sbc-flyout-category">{activeMenuData.desc}</span>
+                </div>
+                <div className="sbc-flyout-content-wrap">
+                  <div className="sbc-flyout-columns-container">
+                    {NAV_MENU_DATA.map((menu) => (
+                      <div key={menu.id} className="sbc-flyout-column-slot">
+                        <div className="sbc-flyout-slot-measure">
+                          {menu.label}
+                          {menu.children && (
+                            <svg className="sbc-nav-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none">
+                              <path d="M2.5 3.5L5 6.5L7.5 3.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          )}
+                        </div>
+
+                        {activeMenuData.id === menu.id && activeMenuData.children && (
+                          <div className="sbc-flyout-links">
+                            {activeMenuData.children.map((child) => (
+                              <a key={child.id} className="sbc-flyout-link" href={`#${child.id}`}>
+                                <span className="sbc-flyout-link-text">{child.label}</span>
+                                <svg className="sbc-flyout-link-arrow" width="14" height="14" viewBox="0 0 20 20" fill="none">
+                                  <path d="M5 10H15M15 10L10 5M15 10L10 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              </a>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
       </nav>
+
+      {/* Flyout backdrop overlay */}
+      {showFlyout && (
+        <div
+          className="sbc-flyout-backdrop"
+          onMouseEnter={handleMenuLeave}
+        />
+      )}
+
+      {/* Mobile Menu Fullscreen Overlay (Accordion Style) */}
+      <div 
+        className={`sbc-mobile-menu-overlay ${isMobileMenuOpen ? 'sbc-mobile-menu-open' : ''}`}
+        data-lenis-prevent="true"
+      >
+        <div className="sbc-mobile-menu-header">
+          <button className="sbc-mobile-close-btn" onClick={toggleMobileMenu}>
+            {/* Google Material Icon: Close */}
+            <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px" fill="currentColor">
+              <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+            </svg>
+          </button>
+        </div>
+        
+        <div className="sbc-mobile-menu-body">
+          <div className="sbc-mobile-accordion">
+            {NAV_MENU_DATA.map((menu) => (
+              <div key={menu.id} className="sbc-mobile-accordion-item">
+                <div 
+                  className={`sbc-mobile-accordion-header ${mobileActiveMenu === menu.id ? 'active' : ''}`}
+                  onClick={() => setMobileActiveMenu(mobileActiveMenu === menu.id ? null : menu.id)}
+                >
+                  <span className="sbc-mobile-accordion-title">{menu.label}</span>
+                  {menu.children ? (
+                    <svg 
+                      className={`sbc-mobile-accordion-chevron ${mobileActiveMenu === menu.id ? 'open' : ''}`} 
+                      xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  ) : (
+                    <svg className="sbc-mobile-accordion-chevron" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none" style={{ visibility: 'hidden' }}>
+                    </svg>
+                  )}
+                </div>
+                {menu.children && (
+                  <div className={`sbc-mobile-accordion-content ${mobileActiveMenu === menu.id ? 'open' : ''}`}>
+                    {menu.children.map(child => (
+                      <div 
+                        key={child.id} 
+                        className="sbc-mobile-2depth-link"
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                          window.location.hash = child.id;
+                        }}
+                      >
+                        {child.label}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="sbc-mobile-accordion-footer">
+            <div className="sbc-mobile-footer-link" onClick={() => {
+              setIsMobileMenuOpen(false);
+              handleStartChatbot();
+            }}>
+              <span className="sbc-mobile-footer-title">새가족 등록</span>
+              {/* Google Material Icon: arrow_outward */}
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor" className="sbc-mobile-footer-icon">
+                <path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* 2. Hero Header Section */}
       <header className="sbc-hero">
