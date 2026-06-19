@@ -148,6 +148,8 @@ export default function MainPage() {
 
   // Flyout navigation hover state
   const [hoveredMenu, setHoveredMenu] = useState(null);
+  const [activeMenuData, setActiveMenuData] = useState(null);
+  const [showFlyout, setShowFlyout] = useState(false);
   const menuCloseTimerRef = useRef(null);
 
   const handleMenuEnter = useCallback((menuId) => {
@@ -156,11 +158,17 @@ export default function MainPage() {
       menuCloseTimerRef.current = null;
     }
     setHoveredMenu(menuId);
+    const data = NAV_MENU_DATA.find((m) => m.id === menuId);
+    if (data) {
+      setActiveMenuData(data);
+      setShowFlyout(true);
+    }
   }, []);
 
   const handleMenuLeave = useCallback(() => {
     menuCloseTimerRef.current = setTimeout(() => {
       setHoveredMenu(null);
+      setShowFlyout(false);
       menuCloseTimerRef.current = null;
     }, 150);
   }, []);
@@ -171,12 +179,6 @@ export default function MainPage() {
       if (menuCloseTimerRef.current) clearTimeout(menuCloseTimerRef.current);
     };
   }, []);
-
-  // Determine the currently active flyout data
-  const activeMenuData = hoveredMenu
-    ? NAV_MENU_DATA.find((m) => m.id === hoveredMenu)
-    : null;
-  const showFlyout = !!activeMenuData;
 
   // Mobile menu states
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -491,7 +493,7 @@ export default function MainPage() {
           onMouseLeave={handleMenuLeave}
         >
           <div className="sbc-flyout-inner">
-            {showFlyout && (
+            {activeMenuData && (
               <>
                 <div className="sbc-flyout-category-wrap">
                   <span className="sbc-flyout-category">{activeMenuData.desc}</span>
@@ -528,9 +530,9 @@ export default function MainPage() {
       </nav>
 
       {/* Flyout backdrop overlay */}
-      {showFlyout && (
+      {activeMenuData && (
         <div
-          className="sbc-flyout-backdrop"
+          className={`sbc-flyout-backdrop ${showFlyout ? 'sbc-flyout-backdrop-open' : ''}`}
           onMouseEnter={handleMenuLeave}
         />
       )}
