@@ -1581,15 +1581,15 @@ body.no-scroll {
   transform: scale(1.05);
 }
 
-/* Floating element sizes (increased by 1.5x) */
-.sbc-f-img-1 { width: 6rem; height: 6rem; }
-.sbc-f-img-2 { width: 7.5rem; height: 7.5rem; }
-.sbc-f-img-3 { width: 10.5rem; height: 15rem; }
-.sbc-f-img-4 { width: 9rem; height: 9rem; }
-.sbc-f-img-5 { width: 10.5rem; height: 10.5rem; }
-.sbc-f-img-6 { width: 10.5rem; height: 10.5rem; }
-.sbc-f-img-7 { width: 15rem; height: 19.5rem; }
-.sbc-f-img-8 { width: 9rem; height: 9rem; }
+/* Floating element sizes (Mobile) */
+.sbc-f-img-1 { width: 4rem; height: 4rem; }
+.sbc-f-img-2 { width: 5rem; height: 5rem; }
+.sbc-f-img-3 { width: 7rem; height: 10rem; }
+.sbc-f-img-4 { width: 6rem; height: 6rem; }
+.sbc-f-img-5 { width: 7rem; height: 7rem; }
+.sbc-f-img-6 { width: 7rem; height: 7rem; }
+.sbc-f-img-7 { width: 10rem; height: 13rem; }
+.sbc-f-img-8 { width: 6rem; height: 6rem; }
 
 @media (min-width: 768px) {
   .sbc-insta-title { font-size: 4rem; }
@@ -1608,6 +1608,13 @@ body.no-scroll {
   .sbc-insta-preview {
     height: 100dvh;
     padding: var(--spacing-64) var(--spacing-16);
+  }
+}
+
+@media (max-width: 767px) {
+  .sbc-floating-container > div:nth-child(2),
+  .sbc-floating-container > div:nth-child(8) {
+    display: none !important;
   }
 }
 
