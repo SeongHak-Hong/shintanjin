@@ -7,6 +7,7 @@ import { BlurFade } from './ui/blur-fade';
 import { Floating, FloatingElement } from './ui/ParallaxFloating';
 import { motion } from 'framer-motion';
 import sbcLogo from '../assets/SBC-logo.svg';
+import PageTransition from './PageTransition';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -448,7 +449,7 @@ export default function MainPage() {
   ];
 
   return (
-    <>
+    <PageTransition>
       <div className="sbc-clone-root" style={{ position: 'relative', zIndex: 1, backgroundColor: 'var(--color-paper-white)', marginBottom: footerHeight }}>
       {/* 1. Header Navigation Bar with Flyout 2-depth Menu */}
       <nav
@@ -1057,6 +1058,6 @@ export default function MainPage() {
           </div>
         </div>
       </footer>
-    </>
+    </PageTransition>
   );
 }

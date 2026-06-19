@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '../firebase';
 import { Calendar, Clock, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
+import PageTransition from './PageTransition';
 
 const DEFAULT_SCHEDULES = [
   { id: 'demo-1', date: '2026-06-21', title: '주일 대예배', time: '11:00', location: '본당 2층', category: '예배' },
@@ -83,7 +84,8 @@ export default function SchedulePage() {
   }, []);
 
   return (
-    <div style={{
+    <PageTransition backgroundColor="#fafcff">
+      <div style={{
       minHeight: '100vh',
       backgroundColor: '#fafcff', // 깨끗한 오프화이트 배경
       padding: '80px 20px',
@@ -268,6 +270,7 @@ export default function SchedulePage() {
           })()
         )}
       </div>
-    </div>
+      </div>
+    </PageTransition>
   );
 }

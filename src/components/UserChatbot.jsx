@@ -3,6 +3,7 @@ import VisualizerCanvas from './VisualizerCanvas';
 import StatusPill from './StatusPill';
 import MainPrompt from './MainPrompt';
 import VoiceVisualizer from './VoiceVisualizer';
+import PageTransition from './PageTransition';
 
 // 사용자에게 질문을 유도하는 주보/소식 관련 롤링 안내 문구
 const IDLE_PROMPTS = [
@@ -344,7 +345,7 @@ ${CHURCH_BULLETIN_CONTEXT}
         : "교회 주보, 소식, 성경 구절 등을 알려드릴 수 있습니다.";
 
     return (
-        <>
+        <PageTransition backgroundColor="var(--color-obsidian)">
             {/* 부드러운 웜 바이올렛 radial wash 셰이더 배경 */}
             <VisualizerCanvas />
 
@@ -423,6 +424,6 @@ ${CHURCH_BULLETIN_CONTEXT}
                     </div>
                 </div>
             )}
-        </>
+        </PageTransition>
     );
 }
