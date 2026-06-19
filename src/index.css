@@ -1492,86 +1492,122 @@ body.no-scroll {
   box-shadow: var(--shadow-subtle);
 }
 
-/* Instagram Section */
-.sbc-instagram-section {
-  padding: var(--spacing-80) 0;
-  background-color: var(--color-paper-white);
+/* Instagram Section - Parallax Floating (Full Section) */
+.sbc-insta-section-full {
+  width: 100%;
+  background-color: #000;
+  position: relative;
+}
+
+.sbc-insta-preview {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100dvh;
+  min-height: 600px;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
+  padding: var(--spacing-80) var(--spacing-24);
+  box-sizing: border-box;
 }
 
-.sbc-instagram-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-40);
-  margin-bottom: var(--spacing-64);
-  align-items: start;
-}
-
-.sbc-instagram-title {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.sbc-instagram-desc-wrap {
+.sbc-insta-content {
+  z-index: 50;
+  text-align: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--spacing-24);
-  align-items: flex-start;
+  pointer-events: none;
+  max-width: 800px;
 }
 
-.sbc-instagram-desc {
+.sbc-insta-title {
+  font-family: var(--font-moderat-serif);
+  font-size: 3rem;
+  color: var(--color-paper-white);
   margin: 0;
+  line-height: 1.2;
+  word-break: keep-all;
 }
 
-/* Marquee Styles */
-.sbc-marquee-wrapper {
-  width: 100%;
-  overflow: hidden;
+.sbc-insta-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  white-space: pre-line;
 }
 
-.sbc-marquee-container {
-  display: flex;
-  width: max-content;
-  animation: marquee 60s linear infinite;
-  /* Slowed down from 30s to 60s */
-  gap: var(--spacing-16);
+.sbc-insta-content .sbc-btn-insta {
+  pointer-events: auto;
+  margin-top: var(--spacing-16);
+  background-color: var(--color-paper-white);
+  color: #000;
+  border-color: var(--color-paper-white);
 }
 
-
-
-.sbc-marquee-item {
-  width: 320px;
-  height: 320px;
-  border-radius: var(--radius-containers);
-  overflow: hidden;
-  flex-shrink: 0;
+.sbc-insta-content .sbc-btn-insta:hover {
+  background-color: transparent;
+  color: var(--color-paper-white);
+  border-color: var(--color-paper-white);
 }
 
-.sbc-marquee-item img {
+.sbc-floating-container {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  overflow: hidden;
 }
 
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
+.sbc-floating-element {
+  position: absolute;
+  will-change: transform;
+}
 
-  100% {
-    transform: translateX(calc(-50% - (var(--spacing-16) / 2)));
-  }
+.sbc-floating-img {
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  border-radius: var(--radius-cards);
+  width: 100%;
+  height: 100%;
+}
+
+.sbc-floating-img:hover {
+  transform: scale(1.05);
+}
+
+/* Floating element sizes (increased by 1.5x) */
+.sbc-f-img-1 { width: 6rem; height: 6rem; }
+.sbc-f-img-2 { width: 7.5rem; height: 7.5rem; }
+.sbc-f-img-3 { width: 10.5rem; height: 15rem; }
+.sbc-f-img-4 { width: 9rem; height: 9rem; }
+.sbc-f-img-5 { width: 10.5rem; height: 10.5rem; }
+.sbc-f-img-6 { width: 10.5rem; height: 10.5rem; }
+.sbc-f-img-7 { width: 15rem; height: 19.5rem; }
+.sbc-f-img-8 { width: 9rem; height: 9rem; }
+
+@media (min-width: 768px) {
+  .sbc-insta-title { font-size: 4rem; }
+  .sbc-insta-subtitle { font-size: 1.25rem; }
+  .sbc-f-img-1 { width: 9rem; height: 9rem; }
+  .sbc-f-img-2 { width: 10.5rem; height: 10.5rem; }
+  .sbc-f-img-3 { width: 15rem; height: 19.5rem; }
+  .sbc-f-img-4 { width: 12rem; height: 12rem; }
+  .sbc-f-img-5 { width: 13.5rem; height: 13.5rem; }
+  .sbc-f-img-6 { width: 13.5rem; height: 18rem; }
+  .sbc-f-img-7 { width: 19.5rem; height: 100%; }
+  .sbc-f-img-8 { width: 12rem; height: 12rem; }
 }
 
 @media (max-width: 991px) {
-  .sbc-instagram-header {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-24);
-  }
-
-  .sbc-marquee-item {
-    width: 280px;
-    height: 280px;
+  .sbc-insta-preview {
+    height: 100dvh;
+    padding: var(--spacing-64) var(--spacing-16);
   }
 }
 

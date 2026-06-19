@@ -4,6 +4,8 @@ import { ROUTE_CHATBOT } from '../constants/routes';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { BlurFade } from './ui/blur-fade';
+import { Floating, FloatingElement } from './ui/ParallaxFloating';
+import { motion } from 'framer-motion';
 import sbcLogo from '../assets/SBC-logo.svg';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -877,33 +879,103 @@ export default function MainPage() {
       </section>
 
       {/* 7.5. Instagram Section */}
-      <section className="sbc-instagram-section">
-        <div className="sbc-container">
-          <div className="sbc-instagram-header">
-            <BlurFade delay={0} inView><h2 className="sbc-instagram-title sbc-heading-style-h3">
-              삶이 되는 예배
-            </h2></BlurFade>
-            <div className="sbc-instagram-desc-wrap">
-              <BlurFade delay={0.15} inView><p className="sbc-instagram-desc sbc-text-medium">
-                주일의 예배당을 넘어, 성도들의 평범한 일상 속에서도 하나님의 은혜는 계속됩니다. 함께 기도하고, 땀 흘려 봉사하고, 해맑게 웃는 신탄진침례교회의 따뜻한 순간들을 사진으로 기록합니다. 우리의 걸음이 담긴 온라인 갤러리에 방문하셔서, 서로의 삶을 응원하고 소통하는 기쁨을 누려보세요.
-              </p></BlurFade>
-              <BlurFade delay={0.3} inView><button className="sbc-btn-story" onClick={() => window.open('https://instagram.com', '_blank')}>
-                <span>인스타그램 방문하기</span>
+      <section className="sbc-insta-section-full">
+        <div className="sbc-insta-preview">
+          <div className="sbc-insta-content">
+            <BlurFade delay={0} inView>
+              <h2 className="sbc-insta-title">
+                삶이 되는 예배
+              </h2>
+            </BlurFade>
+            <BlurFade delay={0.15} inView>
+              <p className="sbc-insta-subtitle">
+                평범한 일상 속, 특별한 은혜.<br/>신탄진침례교회의 따뜻한 순간들.
+              </p>
+            </BlurFade>
+            <BlurFade delay={0.3} inView>
+              <button className="sbc-btn-story sbc-btn-insta" onClick={() => window.open('https://instagram.com/shintanjin_baptist_church', '_blank')}>
+                <span>Instagram 방문하기</span>
                 <span className="material-symbols-outlined sbc-btn-icon">arrow_outward</span>
-              </button></BlurFade>
-            </div>
+              </button>
+            </BlurFade>
           </div>
-        </div>
-        
-        <div className="sbc-marquee-wrapper">
-          <div className="sbc-marquee-container">
-            {/* Duplicate the array to create a seamless infinite scrolling effect */}
-            {[...instagramImages, ...instagramImages].map((img, idx) => (
-              <div key={idx} className="sbc-marquee-item">
-                <img src={img} alt={`교회 일상 사진 ${idx + 1}`} loading="lazy" />
-              </div>
-            ))}
-          </div>
+
+          <Floating sensitivity={-1} className="overflow-hidden">
+            <FloatingElement depth={0.5} style={{ top: '8%', left: '11%' }}>
+              <motion.img
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.1 }}
+                src={instagramImages[0]}
+                className="sbc-floating-img sbc-f-img-1"
+              />
+            </FloatingElement>
+            <FloatingElement depth={1} style={{ top: '10%', left: '32%' }}>
+              <motion.img
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                src={instagramImages[1]}
+                className="sbc-floating-img sbc-f-img-2"
+              />
+            </FloatingElement>
+            <FloatingElement depth={2} style={{ top: '2%', left: '53%' }}>
+              <motion.img
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                src={instagramImages[2]}
+                className="sbc-floating-img sbc-f-img-3"
+              />
+            </FloatingElement>
+            <FloatingElement depth={1} style={{ top: '0%', left: '83%' }}>
+              <motion.img
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                src={instagramImages[3]}
+                className="sbc-floating-img sbc-f-img-4"
+              />
+            </FloatingElement>
+
+            <FloatingElement depth={1} style={{ top: '40%', left: '2%' }}>
+              <motion.img
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                src={instagramImages[4]}
+                className="sbc-floating-img sbc-f-img-5"
+              />
+            </FloatingElement>
+            <FloatingElement depth={2} style={{ top: '70%', left: '77%' }}>
+              <motion.img
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                src={instagramImages[5]}
+                className="sbc-floating-img sbc-f-img-6"
+              />
+            </FloatingElement>
+
+            <FloatingElement depth={4} style={{ top: '73%', left: '15%' }}>
+              <motion.img
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.7 }}
+                src={instagramImages[0]}
+                className="sbc-floating-img sbc-f-img-7"
+              />
+            </FloatingElement>
+            <FloatingElement depth={1} style={{ top: '80%', left: '50%' }}>
+              <motion.img
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.8 }}
+                src={instagramImages[1]}
+                className="sbc-floating-img sbc-f-img-8"
+              />
+            </FloatingElement>
+          </Floating>
         </div>
       </section>
 
