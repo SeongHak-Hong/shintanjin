@@ -74,6 +74,24 @@ To maintain compatibility with existing codebase variables, the tokens are mappe
 
 ---
 
+## Tokens — Layout & Grid System
+
+### Global 12-Column Grid (`.sbc-grid`)
+* **Role:** 사이트 전역의 레이아웃 배치를 담당하는 표준 12-Column CSS Grid 시스템.
+* **Usage:** 부모 컨테이너에 `.sbc-grid` 클래스를 부여하고, 자식 요소들에 `.sbc-col-span-1` ~ `.sbc-col-span-12` 클래스를 사용하여 각 요소가 차지할 영역(비율)을 결정합니다.
+* **Responsive Behavior:** 
+  * 데스크탑 (768px 이상): 12컬럼 구조 유지 (`gap: 1rem`)
+  * 모바일 (767px 이하): 1컬럼 구조로 자동 폴백(Stack)되어 콘텐츠가 세로로 나열됨 (`gap: 1.5rem`)
+* **Example:**
+  ```html
+  <div className="sbc-grid">
+    <div className="sbc-col-span-4">왼쪽 사이드바 (4/12)</div>
+    <div className="sbc-col-span-8">오른쪽 메인 콘텐츠 (8/12)</div>
+  </div>
+  ```
+
+---
+
 ## Background Shader Atmosphere (VisualizerCanvas)
 * Ambient background represents the SBC homepage header gradient: transitioning between Blue (`#77A8FF`), Warm Peach (`#FFC086`), Beige (`#f1f0eb`), and Duck Egg Blue (`#f1f5f8`). 
 * Smooth fluid animation remains running at very low speed (`u_time * 0.05`).
