@@ -977,7 +977,7 @@ body.no-scroll {
 
 /* 3. Section paddings */
 .sbc-section {
-  padding: var(--spacing-96) 0;
+  padding: 12rem 0;
   box-sizing: border-box;
 }
 
@@ -1096,7 +1096,7 @@ body.no-scroll {
 
 /* About text area inside the combined section */
 .sbc-about-area {
-  padding: var(--spacing-96) 0 0 0;
+  padding: 12rem 0 0 0;
   background-color: var(--color-paper-white);
 }
 
@@ -1729,7 +1729,7 @@ body.no-scroll {
 }
 
 .sbc-new-family-welcome {
-  padding: var(--spacing-96) 0 var(--spacing-64);
+  padding: 12rem 0 8rem 0;
   position: relative;
   z-index: 1;
   background-color: var(--color-slate);

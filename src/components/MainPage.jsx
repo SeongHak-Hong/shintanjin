@@ -606,7 +606,7 @@ export default function MainPage() {
           <div className="sbc-hero-container">
             <div className="sbc-hero-top-spacing"></div>
 
-            <BlurFade delay={0} inView><h2 className="sbc-hero-title" style={{ fontSize: '8rem', fontWeight: '300', letterSpacing: '-0.02em', lineHeight: '1.2', textAlign: 'center', width: '100%', position: 'relative', zIndex: 10, transform: `translate3d(0px, ${lastScrollY * -0.15}px, 0px)`, willChange: 'transform' }}>
+            <BlurFade delay={0} inView><h2 className="sbc-hero-title" style={{ fontSize: '5.5rem', fontWeight: '300', letterSpacing: '-0.02em', lineHeight: '1.2', textAlign: 'center', width: '100%', position: 'relative', zIndex: 10, transform: `translate3d(0px, ${lastScrollY * -0.15}px, 0px)`, willChange: 'transform' }}>
               <span className="sbc-title-line">말씀 위에</span>
               <span className="sbc-title-span-wrap" style={{ display: 'inline-block' }}>
                 <span className="sbc-title-span-world" style={{ fontWeight: '400', color: 'var(--color-slate-blue)' }}>&nbsp;든든히 세워지는 교회</span>
@@ -625,19 +625,16 @@ export default function MainPage() {
           {/* About text above video pin area */}
           <div className="sbc-about-area">
             <div className="sbc-container">
-              <div className="sbc-grid">
-                <div className="sbc-col-span-4">
-                  <BlurFade delay={0} inView><h2 className="sbc-label-style-2">2026 비전 말씀</h2></BlurFade>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '64px' }}>
+                <div>
+                  <BlurFade delay={0} inView><h2 className="sbc-label-style-2" style={{ margin: 0 }}>2026 비전 말씀</h2></BlurFade>
                 </div>
-                <div className="sbc-col-span-8 sbc-about-text-column">
-                  <BlurFade delay={0.15} inView><p className="sbc-heading-style-h5" style={{ wordBreak: 'keep-all' }}>
-                    지금 내가 너희를 주와 및 그 은혜의 말씀께 부탁하노니 그 말씀이 너희를 능히 든든히 세우사 거룩하게 하심을 입은 모든 자 가운데 기업이 있게 하시리라 (행 20:32)
-                  </p></BlurFade>
-                  <BlurFade delay={0.3} inView><button className="sbc-btn-story" onClick={handleStartChatbot}>
-                    <span>음성 비서 체험하기</span>
-                    <span className="material-symbols-outlined sbc-btn-icon">arrow_outward</span>
-                  </button></BlurFade>
-                </div>
+                <BlurFade delay={0.15} inView><p className="sbc-heading-style-h5" style={{ maxWidth: '1000px', fontSize: '40px', fontWeight: 'var(--font-weight-regular)', lineHeight: '1.5', wordBreak: 'keep-all', margin: 0 }}>
+                  지금 내가 너희를 주와 및 그 은혜의 말씀께 부탁하노니<br />
+                  그 말씀이 너희를 능히 든든히 세우사<br />
+                  거룩하게 하심을 입은 모든 자 가운데 기업이 있게 하시리라<br />
+                  <span style={{ display: 'block', marginTop: '32px', fontSize: '24px', color: 'var(--color-iron)', fontWeight: '400' }}>행 20:32</span>
+                </p></BlurFade>
               </div>
             </div>
           </div>
